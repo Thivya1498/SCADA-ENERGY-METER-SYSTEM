@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfect Map View</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Set the size of the map container */
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Perfect Map View</h1>
+    <!-- Create a div element to hold the map -->
+    <div id="map"></div>
+
+    <script>
+        // Function to initialize the map
+        function initMap() {
+            // Specify the latitude and longitude of the location you want to display
+            var latitude = 51.5074; // Replace with your desired latitude
+            var longitude = -0.1278; // Replace with your desired longitude
+
+            // Create a map centered on the specified location
+            var map = L.map('map').setView([latitude, longitude], 15); // Adjust the zoom level as needed
+
+            // Add a tile layer (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add a marker at the specified location
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup('Your desired location')
+                .openPopup();
+        }
+    </script>
+
+    <!-- Include Leaflet.js library for working with maps -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Call the initMap() function to initialize the map -->
+    <script>
+        initMap();
+    </script>
+</body>
+</html>

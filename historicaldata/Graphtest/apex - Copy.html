@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Meter Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
+    <style>
+        /* Basic CSS styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0B1437;
+            color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #0B1437;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #111C44;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Energy Meter Data</h2>
+        <label for="customer_serial_number">Select Energy Meter ID:</label>
+        <select name="customer_serial_number" id="customer_serial_number">
+            <!-- Populate this dropdown with your energy meter IDs -->
+            <option value="28167148069191683">28167148069191683</option>
+            <!-- Add more options as needed -->
+        </select>
+    
+        <!-- New dropdown for data type (Voltage LN, Voltage LL, Current) -->
+        <label for="datatype">Select Data Type:</label>
+        <select name="datatype" id="datatype">
+            <option value="Voltage LN">Voltage LN</option>
+            <option value="Voltage LL">Voltage LL</option>
+            <option value="Current">Current</option>
+        </select>
+        
+        <!-- New date input for selecting a single date -->
+        <label for="selected_date">Select Date:</label>
+        <input type="date" id="date" name="date">
+        <br><br>
+    
+        <button onclick="fetchData()">View Data</button>
+    
+        <h4 id="dataInfo"></h4>
+    
+        <div id="chartContainer">
+            <!-- Line chart will be displayed here -->
+            <div id="lineChart"></div>
+        </div>
+    
+        <div id="dataContainer">
+            <!-- Data table will be displayed here -->
+        </div>
+    </div>
+    
+    <script>
+        var lineChart; // Global variable to store the chart instance
+        
+        // Function to fetch data, called on page load and when the "View Data" button is clicked
+        function fetchData() {
+            var selectedEnergyMeterId = document.getElementById("customer_serial_number").value;
+            var selectedDate = document.getElementById("date").value;
+            var selectedDataType = document.getElementById("datatype").value;
+
+            // Check if the date input is empty, and if so, set it to the current date
+            if (selectedDate === "") {
+                var currentDate = new Date();
+                var day = String(currentDate.getDate()).padStart(2, '0');
+                var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+                var year = currentDate.getFullYear();
+                selectedDate = year + '-' + month + '-' + day;
+                document.getElementById("date").value = selectedDate; // Update the date input field
+            }
+
+            // AJAX request to fetch data
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = xhr.responseText;
+                    document.getElementById("dataContainer").innerHTML = response;
+                    document.getElementById("dataInfo").textContent = "Energy Meter ID: " + selectedEnergyMeterId + ", Date: " + selectedDate + ", Data Type: " + selectedDataType;
+
+                    // Extract data from the table and generate the chart
+                    extractDataAndGenerateChart(selectedDataType);
+                }
+            };
+
+            // Modify the URL to include the selected date
+            xhr.open("GET", "fetch_data.php?customer_serial_number=" + selectedEnergyMeterId + "&date=" + selectedDate + "&datatype=" + selectedDataType, true);
+            xhr.send();
+        }
+
+        function extractDataAndGenerateChart(selectedDataType) {
+            // Extracting data from the table
+            var table = document.querySelector("table");
+            var tableData = [];
+            var headers = [];
+            var rows = table.querySelectorAll("tr");
+
+            // Extract table headers
+            var headerCells = rows[0].querySelectorAll("th");
+            for (var i = 0; i < headerCells.length; i++) {
+                headers.push(headerCells[i].textContent);
+            }
+
+            // Extract table rows
+            for (var i = 1; i < rows.length; i++) {
+                var rowData = {};
+                var cells = rows[i].querySelectorAll("td");
+                for (var j = 0; j < cells.length; j++) {
+                    var parameter = headers[j];
+                    var value = parseFloat(cells[j].textContent);
+                    rowData[parameter] = value;
+                }
+                tableData.push(rowData);
+            }
+
+            // Extract X values (time) from the table data
+            var chartXValues = tableData.map(function (row) {
+                return row["Last Update"];
+            });
+
+            // Extract Y values based on the selected data type
+            var chartYValues = [];
+            var legendLabels = [];
+            if (selectedDataType === 'Voltage LN') {
+                chartYValues.push(tableData.map(function (row) {
+                    return row["L1"];
+                }));
+                chartYValues.push(tableData.map(function (row) {
+                    return row["L2"];
+                }));
+                chartYValues.push(tableData.map(function (row) {
+                    return row["L3"];
+                }));
+                legendLabels = ["L1", "L2", "L3"];
+            } else if (selectedDataType === 'Voltage LL') {
+                chartYValues.push(tableData.map(function (row) {
+                    return row["L12"];
+                }));
+                chartYValues.push(tableData.map(function (row) {
+                    return row["L32"];
+                }));
+                chartYValues.push(tableData.map(function (row) {
+                    return row["L13"];
+                }));
+                legendLabels = ["L12", "L32", "L13"];
+            } else if (selectedDataType === 'Current') {
+                chartYValues.push(tableData.map(function (row) {
+                    return row["I1"];
+                }));
+                chartYValues.push(tableData.map(function (row) {
+                    return row["I2"];
+                }));
+                chartYValues.push(tableData.map(function (row) {
+                    return row["I3"];
+                }));
+                legendLabels = ["I1", "I2", "I3"];
+            }
+
+            // Remove the existing chart if it exists
+            if (lineChart) {
+                lineChart.destroy();
+            }
+
+            // Create the line chart
+            var options = {
+                chart: {
+                    type: 'line',
+                    height: 350,
+                    stacked: false
+                },
+                xaxis: {
+                    categories: chartXValues,
+                    title: {
+                        text: 'Time'
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: selectedDataType
+                    }
+                },
+                series: []
+            };
+
+            for (var i = 0; i < chartYValues.length; i++) {
+                options.series.push({
+                    name: legendLabels[i],
+                    data: chartYValues[i]
+                });
+            }
+
+            var chart = new ApexCharts(document.querySelector("#lineChart"), options);
+            chart.render();
+        }
+        fetchData();
+    </script>
+</body>
+</html>

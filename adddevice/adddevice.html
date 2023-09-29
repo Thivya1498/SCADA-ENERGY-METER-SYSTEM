@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="sidemenustyle.css">
+    <link rel="stylesheet" href="adddevicestyle.css">
+    <title>Form Submit</title>
+    <style>
+        /* CSS for the dropdown menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+    
+        /* Style for the main menu item */
+        .dropdown .dropdown-toggle {
+            padding: 10px;
+            color: #fff;
+            cursor: pointer;
+        }
+    
+        /* Style for the dropdown content (hidden by default) */
+        .dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #2b528d;
+            min-width: 160px;
+            height: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            border-radius: 4px;
+        }
+    
+        /* Style for the dropdown items */
+        .dropdown .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+    
+        /* Change color on hover */
+        .dropdown .dropdown-content a:hover {
+            background-color: #2b528d;
+        }
+    
+        /* Show the dropdown content when hovering over or clicking the main menu item */
+        .dropdown:hover .dropdown-content,
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+      </style>
+
+    </head>
+    <body>
+        <nav>
+            <div class="sidebar-top">
+              <span class="shrink-btn">
+                  <i class='bx bx-chevron-left'></i>
+              </span>
+              <img src="images/RE - Logo.png" class="logo" alt="">
+              <h3 class="hide">Reactive Energy</h3>
+          </div>
+        
+          <div class="search">
+              <i class='bx bx-search'></i>
+              <input type="text" class="hide" placeholder="Quick Search ..." id="quicksearch">
+          </div>
+        
+          <div class="sidebar-links">
+              <ul>
+                  <li class="tooltip-element" data-tooltip="0">
+                      <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/homepage/homepage.html" class="active" data-active="0">
+                          <div class="icon">
+                              <i class='bx bx-home'></i>
+                              <i class='bx bxs-home'></i>
+                          </div>
+                          <span class="link hide">Home</span>
+                      </a>
+                  </li>
+        
+                  <li class="tooltip-element" data-tooltip="1">
+                      <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/realtimedashboard/dash2.html" data-active="1">
+                          <div class="icon">
+                              <i class='bx bxs-dashboard'></i>
+                              <i class='bx bxs-dashboard'></i>
+                          </div>
+                          <span class="link hide">Dashboard</span>
+                      </a>
+                  </li>
+                  
+                  <li class="tooltip-element" data-tooltip="2">
+                      <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/historicaldata/historicalcombine.html" data-active="2">
+                          <div class="icon">
+                              <i class='bx bxs-report'></i>
+                              <i class='bx bxs-report'></i>
+                          </div>
+                          <span class="link hide">Analytic Data</span>
+                      </a>
+                  </li>
+                  
+                  <li class="tooltip-element" data-tooltip="3">
+                      <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/historicaldata/historicalcombine.html" data-active="3">
+                          <div class="icon">
+                              <i class='bx bx-clipboard'></i>
+                              <i class='bx bx-clipboard'></i>
+                          </div>
+                          <span class="link hide">Historical Data</span>
+                      </a>
+                  </li>
+                  
+                  <div class="dropdown" data-tooltip="4">
+                    <a href="#" class="dropdown-toggle" data-active="4">
+                        <div class="icon">
+                            <i class='bx bx-cog'></i>
+                            <i class='bx bxs-cog'></i>
+                        </div>
+                        Management
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/adddevice/adddevice.html" data-active="3">
+                            <div class="icon">
+                                <i class='bx bx-map'></i>
+                                <i class='bx bx-map'></i>
+                            </div>
+                            New Place
+                        </a>
+                        <a href="/SCADAEnergyMeterLatest/adddevice/adddevice.html" data-active="3">
+                            <div class="icon">
+                                <i class='bx bx-tachometer'></i>
+                                <i class='bx bx-tachometer'></i>
+                            </div>
+                            Add Device
+                        </a>
+                        <a href="/SCADAEnergyMeterLatest/companymanagement/companymanagement.html" data-active="3">
+                            <div class="icon">
+                                <i class='bx bx-tachometer'></i>
+                                <i class='bx bx-tachometer'></i>
+                            </div>
+                            Company Management
+                        </a>
+                    </div>
+                  </div>
+    
+                  <li class="tooltip-element dropdown" data-tooltip="5">
+                      <a href="#" class="dropdown-toggle" data-active="5">
+                          <div class="icon">
+                              <i class='bx bx-bell'></i>
+                              <i class='bx bxs-bell'></i>
+                          </div>
+                          <span class="link hide">Alarm</span>
+                      </a>
+    
+    
+    
+                      <li class="tooltip-element" data-tooltip="3">
+                        <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/alarmactives/alarmactive.html" data-active="3">
+                            <div class="icon">
+                                <i class='bx bx-alarm'></i>
+                                <i class='bx bx-alarm'></i>
+                            </div>
+                            <span class="link hide">Alarm Active</span>
+                        </a>
+                    </li>
+    
+                    <li class="tooltip-element" data-tooltip="3">
+                        <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/alarmhistory/alarmhistory.html" data-active="3">
+                            <div class="icon">
+                                <i class='bx bx-history'></i>
+                                <i class='bx bx-history'></i>
+                            </div>
+                            <span class="link hide">Alarm History</span>
+                        </a>
+                    </li>
+                    
+                  
+                  
+                  <li class="tooltip-element" data-tooltip="6">
+                      <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/changedpassword/changepassword.html" data-active="6">
+                          <div class="icon">
+                              <i class='bx bx-cog'></i>
+                              <i class='bx bxs-cog'></i>
+                          </div>
+                          <span class="link hide">Settings</span>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+          <div class="sidebar-footer">
+              <a href="#" class="account tooltip-element" data-tooltip="0">
+                  <i class='bx bx-user'></i>
+              </a>
+              <div class="admin-user tooltip-element" data-tooltip="1">
+                  <div class="admin-profile hide">
+                      <img src="images/Picture5.png" alt="">
+                      <div class="admin-info">
+                          <h3>Mupa J</h3>
+                          <h5>SCADA Designer</h5>
+                      </div>
+                  </div>
+                  <a href="logout.html" class="log-out">
+                      <i class='bx bx-log-out'></i>
+                  </a>
+              </div>
+              <div class="tooltip">
+                  <span class="show">Mupa J</span>
+                  <span>Logout</span>
+              </div>
+          </div>
+        </nav>
+    </body>
+    <script>
+        // JavaScript to toggle the active class for the dropdown menu
+        document.querySelector('.dropdown-toggle').addEventListener('click', function() {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.classList.toggle('active');
+        });
+    </script>
+    <main id="main-content">
+    <div class="content">
+    <div class="title-container-1">
+    <h2>Add new place for the currently and new customer</h2>
+    </div>
+    <form action="submit_url_here" method="POST">
+
+    <!-- Text fields -->
+    <label for="locationName"><span class="mandatory">*</span> Location Name:</label>
+    <input type="text" id="locationName" name="locationName">
+
+    <label for="deviceName"><span class="mandatory">*</span> Device Name:</label>
+    <input type="text" id="deviceName" name="deviceName">
+
+    <!-- Dropdown fields -->
+    <label for="timeZone"><span class="mandatory">*</span> Time Zone:</label>
+    <select id="timeZone" name="timeZone">
+        <!-- Add options for each time zone here -->
+        <option value="GMT">GMT</option>
+        <!-- ... -->
+    </select>
+
+    <label for="country"><span class="mandatory">*</span> Country of Region:</label>
+    <select id="country" name="country">
+        <!-- Add options for each country here -->
+        <option value="MALAYSIA">MALAYSIA</option>
+        <!-- ... -->
+    </select>
+
+    <label for="state"><span class="mandatory">*</span> State:</label>
+    <select id="state" name="state">
+        <!-- Add options for each state here -->
+        <option value="Selangor">Selangor</option>
+        <!-- ... -->
+    </select>
+
+    <label for="city"><span class="mandatory">*</span> City:</label>
+    <select id="city" name="city">
+        <!-- Add options for each city here -->
+        <option value="Petaling Jaya">Petaling Jaya</option>
+        <!-- ... -->
+    </select>
+
+    <label for="address"><span class="mandatory">*</span> Address:</label>
+    <input type="text" id="address" name="address">
+
+    <label for="deviceBrand"><span class="mandatory">*</span> Device Brand:</label>
+    <select id="deviceBrand" name="deviceBrand">
+        <option value="ABB Meter">ABB Meter</option>
+        <option value="DELAB Meter">DELAB Meter</option>
+        <!-- ... -->
+    </select>
+
+    <label for="slaveID"><span class="mandatory">*</span> Slave ID:</label>
+    <select id="slaveID" name="slaveID">
+        <!-- Add options for each Slave ID here -->
+        <option value="ID1">ID1</option>
+        <!-- ... -->
+    </select>
+
+    <label for="deviceSN"><span class="mandatory">*</span> S/N of Device:</label>
+    <input type="text" id="deviceSN" name="deviceSN">
+
+    <label for="baudRate"><span class="mandatory">*</span> Baud Rate of Device:</label>
+    <select id="baudRate" name="baudRate">
+        <option value="9600">9600</option>
+        <option value="19200">19200</option>
+        <!-- ... -->
+    </select>
+
+    <!-- Maps view (You'll need to integrate a maps service for this) -->
+    <div id="mapsView">
+        <!-- Maps service code will go here. For example, Google Maps embed or API integration. -->
+    </div>
+
+    <input type="submit" value="Save">
+    <button type="button" onclick="location.href='your_cancel_url_here';">Cancel</button>
+</form>
+</main>
+<script>
+    // JavaScript to toggle the active class for the dropdown menu
+    document.querySelector('.dropdown-toggle').addEventListener('click', function() {
+        const dropdown = document.querySelector('.dropdown');
+        dropdown.classList.toggle('active');
+    });
+</script>
+</html>

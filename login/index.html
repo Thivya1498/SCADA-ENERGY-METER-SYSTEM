@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="index.css" />
+  <title>
+    ENERGY METER MANAGEMENT
+  </title>
+</head>
+
+<body>
+  <div id="container" class="container">
+    <div id="login" class="login">
+      <div class="main">
+        
+        <!--First Card-->
+        <div class="card">
+          <div class="card__inner">
+            <div class="front face">
+              <div class="login-container sign-in">
+                <div class="frame-13">
+                  <img class="power-meter-1-1" src="images/meter.png" alt="">
+                  <div class="energy-meter-management-system">
+                    Energy Meter <br />Management System
+                  </div>
+                </div>
+                <div class="welcome-back-please-login-to-your-account">
+                  Welcome Back, Please login to your account.
+                </div>
+                <div class="log-in">Log In</div>
+                <form method="post" action="login.php">
+                  <div class="login-form">
+                    <div class="username sign-in">
+                      <div class="username2">Username</div>
+                      <div class="frame-2 input-group">
+                        <i class='bx bxs-user'></i>
+                        <input type="text" name="username" placeholder="Username" required>
+                        <svg
+                          class="vector"
+                          width="21"
+                          height="16"
+                          viewBox="0 0 21 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M20.265 0.142822H1.15633C0.749816 0.142822 0.421387 0.462019 0.421387 0.857108V15.1428C0.421387 15.5379 0.749816 15.8571 1.15633 15.8571H20.265C20.6715 15.8571 20.9999 15.5379 20.9999 15.1428V0.857108C20.9999 0.462019 20.6715 0.142822 20.265 0.142822ZM19.3463 2.61604V14.25H2.07502V2.61604L1.44113 2.13613L2.34373 1.00889L3.32672 1.7522H18.0969L19.0799 1.00889L19.9825 2.13613L19.3463 2.61604ZM18.0969 1.74997L10.7106 7.33032L3.32443 1.74997L2.34144 1.00666L1.43883 2.13389L2.07272 2.61381L9.91828 8.54238C10.1439 8.71274 10.4215 8.80521 10.7072 8.80521C10.9929 8.80521 11.2705 8.71274 11.4961 8.54238L19.3463 2.61604L19.9802 2.13613L19.0776 1.00889L18.0969 1.74997Z"
+                            fill="#355B3E"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="password">
+                      <div class="password2">Password</div>
+                      <div class="frame-2 input-group">
+                        <i class='bx bxs-lock-alt'></i>
+                        <input type="password" name="password" placeholder="Password" required>
+                        <svg
+                          class="eye-off"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M11.8455 9.36842L14.7273 12.1958V12.0526C14.7273 11.3407 14.4399 10.658 13.9285 10.1546C13.417 9.65122 12.7233 9.36842 12 9.36842H11.8455ZM7.93636 10.0842L9.34545 11.4711C9.3 11.6589 9.27273 11.8468 9.27273 12.0526C9.27273 12.7645 9.56006 13.4473 10.0715 13.9507C10.583 14.454 11.2767 14.7368 12 14.7368C12.2 14.7368 12.4 14.71 12.5909 14.6653L14 16.0521C13.3909 16.3474 12.7182 16.5263 12 16.5263C10.7945 16.5263 9.63832 16.055 8.78588 15.216C7.93344 14.377 7.45455 13.2391 7.45455 12.0526C7.45455 11.3458 7.63636 10.6837 7.93636 10.0842ZM2.90909 5.13632L4.98182 7.17632L5.39091 7.57895C3.89091 8.74211 2.70909 10.2632 2 12.0526C3.57273 15.9805 7.45455 18.7632 12 18.7632C13.4091 18.7632 14.7545 18.4947 15.9818 18.0116L16.3727 18.3874L19.0273 21L20.1818 19.8637L4.06364 4M12 7.57895C13.2055 7.57895 14.3617 8.05028 15.2141 8.88926C16.0666 9.72824 16.5455 10.8661 16.5455 12.0526C16.5455 12.6253 16.4273 13.18 16.2182 13.6811L18.8818 16.3026C20.2455 15.1842 21.3364 13.7168 22 12.0526C20.4273 8.12474 16.5455 5.34211 12 5.34211C10.7273 5.34211 9.50909 5.56579 8.36364 5.96842L10.3364 7.89211C10.8545 7.69526 11.4091 7.57895 12 7.57895Z"
+                            fill="#95B29B"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="extra">
+                      <div class="remember">
+                        <svg
+                          class="check-box-default"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M2.81482 14.6666C2.40741 14.6666 2.05852 14.5217 1.76815 14.2318C1.47827 13.9415 1.33334 13.5926 1.33334 13.1852V2.81479C1.33334 2.40739 1.47827 2.0585 1.76815 1.76813C2.05852 1.47825 2.40741 1.33331 2.81482 1.33331H13.1852C13.5926 1.33331 13.9415 1.47825 14.2319 1.76813C14.5217 2.0585 14.6667 2.40739 14.6667 2.81479V13.1852C14.6667 13.5926 14.5217 13.9415 14.2319 14.2318C13.9415 14.5217 13.5926 14.6666 13.1852 14.6666H2.81482ZM6.96297 10.7963C7.06173 10.7963 7.15432 10.781 7.24074 10.7503C7.32716 10.7192 7.40741 10.6666 7.48148 10.5926L11.6852 6.38887C11.821 6.25307 11.8889 6.0864 11.8889 5.88887C11.8889 5.69134 11.8148 5.5185 11.6667 5.37035C11.5309 5.23455 11.358 5.16665 11.1482 5.16665C10.9383 5.16665 10.7654 5.23455 10.6296 5.37035L6.96297 9.03702L5.35185 7.42591C5.21605 7.2901 5.04939 7.2222 4.85185 7.2222C4.65432 7.2222 4.48148 7.29628 4.33334 7.44442C4.19753 7.58023 4.12963 7.75307 4.12963 7.96294C4.12963 8.17282 4.19753 8.34566 4.33334 8.48146L6.44445 10.5926C6.51852 10.6666 6.59877 10.7192 6.68519 10.7503C6.77161 10.781 6.8642 10.7963 6.96297 10.7963Z"
+                            fill="#029664"/>
+                        </svg>
+                        <div class="remember-me">Remember me</div>
+                      </div>
+                      <span class="flip2 forgot-password pointer">Forgot password?</span>
+                    </div>
+                    <div class="frame-16">
+                      <div class="pointer button-login">
+                        <button class="login2" type="submit" name="submit_login" >Login &rarr;</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="don-t-have-an-account-sign-up">
+                  <span>
+                    <span class="don-t-have-an-account-sign-up-span">
+                      Don’t have an account?
+                    </span>
+                  </span>
+                </div>
+              </div>
+            <button class="flip flip-me don-t-have-an-account-sign-up-span3">Sign up</button>
+          </div>
+          
+          
+
+
+          <div class="back face">
+            <!-- SIGN UP -->
+            <div class="login-signup-container sign-up">
+              <div class="rectangle-3"></div>
+              <div class="frame-13">
+                <img class="power-meter-1-1" src="images/meter.png"alt="">
+                <div class="energy-meter-management-system">
+                  Energy Meter <br />Management System
+                </div>
+              </div>
+              <div class="welcome-back-please-login-to-your-account">
+                Please fill the form to register.
+              </div>
+              <div class="log-in">Sign Up</div>
+              <form method="post" action="register.php">
+                <div class="login-form">
+                  <div class="username sign-in">
+                    <div class="username2">Email</div>
+                    <div class="frame-2 input-group">
+                      <i class='bx bxs-user'></i>
+                      <input type="text" name="username" placeholder="Username" required>
+                      <svg
+                          class="vector"
+                          width="21"
+                          height="16"
+                          viewBox="0 0 21 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20.265 0.142822H1.15633C0.749816 0.142822 0.421387 0.462019 0.421387 0.857108V15.1428C0.421387 15.5379 0.749816 15.8571 1.15633 15.8571H20.265C20.6715 15.8571 20.9999 15.5379 20.9999 15.1428V0.857108C20.9999 0.462019 20.6715 0.142822 20.265 0.142822ZM19.3463 2.61604V14.25H2.07502V2.61604L1.44113 2.13613L2.34373 1.00889L3.32672 1.7522H18.0969L19.0799 1.00889L19.9825 2.13613L19.3463 2.61604ZM18.0969 1.74997L10.7106 7.33032L3.32443 1.74997L2.34144 1.00666L1.43883 2.13389L2.07272 2.61381L9.91828 8.54238C10.1439 8.71274 10.4215 8.80521 10.7072 8.80521C10.9929 8.80521 11.2705 8.71274 11.4961 8.54238L19.3463 2.61604L19.9802 2.13613L19.0776 1.00889L18.0969 1.74997Z"
+                            fill="#355B3E"
+                          />
+                        </svg>
+                    </div>
+                  </div>
+                  <div class="password">
+                    <div class="password2">Password</div>
+                    <div class="frame-2 input-group">
+                      <i class='bx bxs-lock-alt'></i>
+                      <input type="password" name="password" placeholder="Password" required>
+                      <svg
+                          class="eye-off"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M11.8455 9.36842L14.7273 12.1958V12.0526C14.7273 11.3407 14.4399 10.658 13.9285 10.1546C13.417 9.65122 12.7233 9.36842 12 9.36842H11.8455ZM7.93636 10.0842L9.34545 11.4711C9.3 11.6589 9.27273 11.8468 9.27273 12.0526C9.27273 12.7645 9.56006 13.4473 10.0715 13.9507C10.583 14.454 11.2767 14.7368 12 14.7368C12.2 14.7368 12.4 14.71 12.5909 14.6653L14 16.0521C13.3909 16.3474 12.7182 16.5263 12 16.5263C10.7945 16.5263 9.63832 16.055 8.78588 15.216C7.93344 14.377 7.45455 13.2391 7.45455 12.0526C7.45455 11.3458 7.63636 10.6837 7.93636 10.0842ZM2.90909 5.13632L4.98182 7.17632L5.39091 7.57895C3.89091 8.74211 2.70909 10.2632 2 12.0526C3.57273 15.9805 7.45455 18.7632 12 18.7632C13.4091 18.7632 14.7545 18.4947 15.9818 18.0116L16.3727 18.3874L19.0273 21L20.1818 19.8637L4.06364 4M12 7.57895C13.2055 7.57895 14.3617 8.05028 15.2141 8.88926C16.0666 9.72824 16.5455 10.8661 16.5455 12.0526C16.5455 12.6253 16.4273 13.18 16.2182 13.6811L18.8818 16.3026C20.2455 15.1842 21.3364 13.7168 22 12.0526C20.4273 8.12474 16.5455 5.34211 12 5.34211C10.7273 5.34211 9.50909 5.56579 8.36364 5.96842L10.3364 7.89211C10.8545 7.69526 11.4091 7.57895 12 7.57895Z"
+                            fill="#95B29B"
+                          />
+                        </svg>
+                    </div>
+                  </div>
+                  <div class="password">
+                    <div class="password2">Confirm Password</div>
+                    <div class="frame-2 input-group">
+                      <i class='bx bxs-lock-alt'></i>
+                      <input type="password" name="password" placeholder="Password" required>
+                      <svg
+                          class="eye-off"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M11.8455 9.36842L14.7273 12.1958V12.0526C14.7273 11.3407 14.4399 10.658 13.9285 10.1546C13.417 9.65122 12.7233 9.36842 12 9.36842H11.8455ZM7.93636 10.0842L9.34545 11.4711C9.3 11.6589 9.27273 11.8468 9.27273 12.0526C9.27273 12.7645 9.56006 13.4473 10.0715 13.9507C10.583 14.454 11.2767 14.7368 12 14.7368C12.2 14.7368 12.4 14.71 12.5909 14.6653L14 16.0521C13.3909 16.3474 12.7182 16.5263 12 16.5263C10.7945 16.5263 9.63832 16.055 8.78588 15.216C7.93344 14.377 7.45455 13.2391 7.45455 12.0526C7.45455 11.3458 7.63636 10.6837 7.93636 10.0842ZM2.90909 5.13632L4.98182 7.17632L5.39091 7.57895C3.89091 8.74211 2.70909 10.2632 2 12.0526C3.57273 15.9805 7.45455 18.7632 12 18.7632C13.4091 18.7632 14.7545 18.4947 15.9818 18.0116L16.3727 18.3874L19.0273 21L20.1818 19.8637L4.06364 4M12 7.57895C13.2055 7.57895 14.3617 8.05028 15.2141 8.88926C16.0666 9.72824 16.5455 10.8661 16.5455 12.0526C16.5455 12.6253 16.4273 13.18 16.2182 13.6811L18.8818 16.3026C20.2455 15.1842 21.3364 13.7168 22 12.0526C20.4273 8.12474 16.5455 5.34211 12 5.34211C10.7273 5.34211 9.50909 5.56579 8.36364 5.96842L10.3364 7.89211C10.8545 7.69526 11.4091 7.57895 12 7.57895Z"
+                            fill="#95B29B"
+                          />
+                        </svg>
+                    </div>
+                  </div>
+                  <div class="frame-16">
+                    <div class="button-signup">
+                      <button class="sign-up3 pointer" type="submit" name="submit_register" >Sign up &rarr;</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="already-have-an-account-login">
+                <span>
+                  <span class="already-have-an-account-login-span">
+                    Already have an account?
+                  </span>
+                  <span class="pointer already-have-an-account-login-span2"></span>
+                </span>
+              </div>
+            </div>
+            <button class="flip return don-t-have-an-account-sign-up-span3">Login</button>
+          </div>
+        </div>
+        <div class="illustration col align-items-center flex-col">
+          <div class="rectangle-4"></div>
+        </div>
+        <!-- SIGN IN -->
+        <img
+          class="corporate-design-trifold-brochure-1-1"
+          src="images/4.png" alt="">
+      </div>
+      
+        
+    </div>
+  </div>
+<!--Jquery-->
+<script src="jquery-3.5.1.js"></script>
+<!--JS-->    
+<script src="script.js"></script>
+
+</body>
+</html>

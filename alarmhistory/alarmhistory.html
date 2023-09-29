@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alarm History</title>
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="sidemenustyle.css">
+  <link rel="stylesheet" href="alarmactivestyles.css">
+  <link rel="stylesheet" href="alarmhistorystyles.css">
+  <link rel="stylesheet" href="realtimedashboard/dashboardstyle.css">
+  <link rel="stylesheet" href="companymanagement/companymanagement.css">
+  <link rel="stylesheet" href="historicaldata/combinepage.css">
+
+</head>
+<body>
+  <nav>
+    <div class="sidebar-top">
+      <span class="shrink-btn">
+          <i class='bx bx-chevron-left'></i>
+      </span>
+      <img src="images/RE - Logo.png" class="logo" alt="">
+      <h3 class="hide">Reactive Energy</h3>
+  </div>
+
+  <div class="search">
+      <i class='bx bx-search'></i>
+      <input type="text" class="hide" placeholder="Quick Search ...">
+  </div>
+
+  <div class="sidebar-links">
+      <ul>
+          <li class="tooltip-element" data-tooltip="0">
+              <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/homepage/homepage.html" class="active" data-active="0">
+                  <div class="icon">
+                      <i class='bx bx-home'></i>
+                      <i class='bx bxs-home'></i>
+                  </div>
+                  <span class="link hide">Home</span>
+              </a>
+          </li>
+
+          <li class="tooltip-element" data-tooltip="1">
+              <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/realtimedashboard/dash2.html" data-active="1">
+                  <div class="icon">
+                      <i class='bx bxs-dashboard'></i>
+                      <i class='bx bxs-dashboard'></i>
+                  </div>
+                  <span class="link hide">Dashboard</span>
+              </a>
+          </li>
+          
+          <li class="tooltip-element" data-tooltip="2">
+              <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/historicaldata/historicalcombine.html" data-active="2">
+                  <div class="icon">
+                      <i class='bx bxs-report'></i>
+                      <i class='bx bxs-report'></i>
+                  </div>
+                  <span class="link hide">Analytic Data</span>
+              </a>
+          </li>
+          
+          <li class="tooltip-element" data-tooltip="3">
+              <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/historicaldata/historicalcombine.html" data-active="3">
+                  <div class="icon">
+                      <i class='bx bx-clipboard'></i>
+                      <i class='bx bx-clipboard'></i>
+                  </div>
+                  <span class="link hide">Historical Data</span>
+              </a>
+          </li>
+          
+          <li class="tooltip-element dropdown" data-tooltip="4">
+              <a href="#" class="dropdown-toggle" data-active="4">
+                  <div class="icon">
+                      <i class='bx bx-cog'></i>
+                      <i class='bx bxs-cog'></i>
+                  </div>
+                  <span class="link hide">Management</span>
+              </a>
+
+              <li class="tooltip-element" data-tooltip="3">
+                <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/adddevice/adddevice.html" data-active="3">
+                    <div class="icon">
+                        <i class='bx bx-map'></i>
+                        <i class='bx bx-map'></i>
+                    </div>
+                    <span class="link hide">New Place</span>
+                </a>
+            </li>
+
+            <li class="tooltip-element" data-tooltip="3">
+                <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/devicemanagement/devicemanagement.html" data-active="3">
+                    <div class="icon">
+                        <i class='bx bx-tachometer'></i>
+                        <i class='bx bx-tachometer'></i>
+                    </div>
+                    <span class="link hide">Company Management</span>
+                </a>
+            </li>
+
+            <li class="tooltip-element" data-tooltip="3">
+              <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/devicemanagement/devicemanagement.html" data-active="3">
+                  <div class="icon">
+                      <i class='bx bx-building'></i>
+                      <i class='bx bx-building'></i>
+                  </div>
+                  <span class="link hide">Add Device</span>
+              </a>
+          </li>
+
+          <li class="tooltip-element dropdown" data-tooltip="5">
+              <a href="#" class="dropdown-toggle" data-active="5">
+                  <div class="icon">
+                      <i class='bx bx-bell'></i>
+                      <i class='bx bxs-bell'></i>
+                  </div>
+                  <span class="link hide">Alarm</span>
+              </a>
+
+
+
+              <li class="tooltip-element" data-tooltip="3">
+                <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/alarmactives/alarmactive.html" data-active="3">
+                    <div class="icon">
+                        <i class='bx bx-alarm'></i>
+                        <i class='bx bx-alarm'></i>
+                    </div>
+                    <span class="link hide">Alarm Active</span>
+                </a>
+            </li>
+
+            <li class="tooltip-element" data-tooltip="3">
+                <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/alarmhistory/alarmhistory.html" data-active="3">
+                    <div class="icon">
+                        <i class='bx bx-history'></i>
+                        <i class='bx bx-history'></i>
+                    </div>
+                    <span class="link hide">Alarm History</span>
+                </a>
+            </li>
+            
+          
+          
+          <li class="tooltip-element" data-tooltip="6">
+              <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/changedpassword/changepassword.html" data-active="6">
+                  <div class="icon">
+                      <i class='bx bx-cog'></i>
+                      <i class='bx bxs-cog'></i>
+                  </div>
+                  <span class="link hide">Settings</span>
+              </a>
+          </li>
+      </ul>
+  </div>
+  <div class="sidebar-footer">
+      <a href="#" class="account tooltip-element" data-tooltip="0">
+          <i class='bx bx-user'></i>
+      </a>
+      <div class="admin-user tooltip-element" data-tooltip="1">
+          <div class="admin-profile hide">
+              <img src="images/Picture5.png" alt="">
+              <div class="admin-info">
+                  <h3>Mupa J</h3>
+                  <h5>SCADA Designer</h5>
+              </div>
+          </div>
+          <a href="logout.html" class="log-out">
+              <i class='bx bx-log-out'></i>
+          </a>
+      </div>
+      <div class="tooltip">
+          <span class="show">Mupa J</span>
+          <span>Logout</span>
+      </div>
+  </div>
+</nav>
+</body>
+
+<main id="main-content">
+  <div class="content">
+    <div class="alarmhistory-icon-container">
+        <img class="alarm-1-history" src="images/alarmhistory.png" alt="" />
+        <label for="alarm-1-history">Alarm History</label>
+    </div>
+    <div class="alarm-history"></div>
+</div>
+    <div class="search-header">
+      <div class="search-row">
+          <label for="plant-search">Plant Name:</label>
+          <input type="text" id="plant-search" placeholder="Search Plant...">
+          
+          <label for="alarm-search">Alarm Name:</label>
+          <input type="text" id="alarm-search" placeholder="Search Alarm...">
+  
+          <label for="start-date-picker">Start Date:</label>
+          <input type="date" id="start-date-picker">
+  
+          <label for="end-date-picker">End Date:</label>
+          <input type="date" id="end-date-picker">
+  
+          <button id="search-button">Search</button>
+          <button class="button" id="clear-selection-button">Clear Selection</button>
+          <button class="button" id="export-data-button">Export Data</button>
+      </div>
+  </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Alarm Severity</th>
+          <th>Plant Name</th>
+          <th>Alarm ID</th>
+          <th>Alarm Name</th>
+          <th>Devices Name</th>
+          <th>Clearance Type</th>
+          <th>Clearance Time</th>
+          <th>Occurrence Time</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Data will be dynamically populated here -->
+      </tbody>
+    </table>
+  </div>
+    <!-- Footer -->
+    <footer>
+      <!-- Footer content and links -->
+      <p>&copy; 2023 Reactive Energy Sdn Bhd | Energy Monitoring System</p>
+  </footer>
+
+</main>
+  <script src="alarmactive.js"></script>
+  <script src="alarmhistory.js"></script>
+  <script src="companymanagement.js"></script>
+  <!-- <script src="app.js"></script> -->
+  
+</html>

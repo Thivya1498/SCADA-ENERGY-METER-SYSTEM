@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.4/xlsx.full.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="sidemenustyle.css">
+    <link rel="stylesheet" href="alarmactivestyles.css">
+    <link rel="stylesheet" href="alarmhistory/alarmhistorystyles.css">
+    <link rel="stylesheet" href="realtimedashboard/dashboardstyle.css">
+    <link rel="stylesheet" href="companymanagement/companymanagement.css">
+    <link rel="stylesheet" href="/historicaldata/combinepage.css">
+
+    <title>Energy Meter Data</title>
+    <style>
+        /* Basic CSS styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0B1437;
+            color: #f2f2f2;
+            margin: 20px;
+          
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input[type="date"]{
+            padding: 10px; 
+            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0E183F;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #10428D;
+            color: #fff;
+            border:1px solid #f2f3f5;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        button.custom-button {
+            padding: 10px 20px;
+            background-color: #10428D;
+            color: #fff;
+            border:1px solid #f2f3f5;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button.custom-button:hover {
+            background-color: #0056b3;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+            color: #666;
+        }
+
+        /* Add your additional CSS styles for tabs and tab content here */
+
+        /* Tab styles */
+        .tab {
+            overflow: hidden;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: 0.3s;
+            color: #D3D3D6;
+            font-size: 16px;
+        }
+
+        .tab button:hover {
+            /* background-color: #007BFF; */
+            color: #fff;
+        }
+
+        /* Tab content styles */
+        .tabcontent {
+            display: none;
+        }
+
+        /* Add styles for active tab here */
+        .tab button.active-tab {
+            border-bottom: 4px solid #007BFF;
+            color: #ced5dd;
+        }
+        input#day{
+            padding: 10px;
+        }
+
+        date-filter month-filter
+        {
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="sidebar-top">
+            <span class="shrink-btn">
+                <i class='bx bx-chevron-left'></i>
+            </span>
+            <img src="images/RE - Logo.png" class="logo" alt="">
+            <h3 class="hide">Reactive Energy</h3>
+        </div>
+    
+        <div class="search">
+            <i class='bx bx-search'></i>
+            <input type="text" class="hide" placeholder="Quick Search ...">
+        </div>
+    
+        <div class="sidebar-links">
+            <ul>
+                <li class="tooltip-element" data-tooltip="0">
+                    <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/homepage/homepage.html" class="active" data-active="0">
+                        <div class="icon">
+                            <i class='bx bx-home'></i>
+                            <i class='bx bxs-home'></i>
+                        </div>
+                        <span class="link hide">Home</span>
+                    </a>
+                </li>
+    
+                <li class="tooltip-element" data-tooltip="1">
+                    <a href="./.html" data-active="1">
+                        <div class="icon">
+                            <i class='bx bxs-dashboard'></i>
+                            <i class='bx bxs-dashboard'></i>
+                        </div>
+                        <span class="link hide">Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="tooltip-element" data-tooltip="2">
+                    <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/historicaldata/try%20copy.html" data-active="2">
+                        <div class="icon">
+                            <i class='bx bxs-report'></i>
+                            <i class='bx bxs-report'></i>
+                        </div>
+                        <span class="link hide">Analytic Data</span>
+                    </a>
+                </li>
+                
+                <li class="tooltip-element" data-tooltip="3">
+                    <a href="history.html" data-active="3">
+                        <div class="icon">
+                            <i class='bx bx-clipboard'></i>
+                            <i class='bx bx-clipboard'></i>
+                        </div>
+                        <span class="link hide">Historical Data</span>
+                    </a>
+                </li>
+                
+                <li class="tooltip-element dropdown" data-tooltip="4">
+                    <a href="#" class="dropdown-toggle" data-active="4">
+                        <div class="icon">
+                            <i class='bx bx-cog'></i>
+                            <i class='bx bxs-cog'></i>
+                        </div>
+                        <span class="link hide">Management</span>
+                    </a>
+                    <div class="dropdown-menu hide">
+                        <a href="./adddevice/adddevice.html">
+                            <i class='bx bx-map'></i> New Place
+                        </a>
+                        <a href="./devicemanagement/devicemanagement.html">
+                            <i class='bx bx-tachometer'></i> Add Device
+                        </a>
+                        <a href="./companymanagement/companymanagement.html">
+                            <i class='bx bx-building'></i> Edit Company
+                        </a>
+                    </div>
+                </li>
+                
+                
+                <li class="tooltip-element dropdown" data-tooltip="5">
+                    <a href="#" class="dropdown-toggle" data-active="5">
+                        <div class="icon">
+                            <i class='bx bx-bell'></i>
+                            <i class='bx bxs-bell'></i>
+                        </div>
+                        <span class="link hide">Alarm</span>
+                    </a>
+                    <div class="dropdown-menu hide">
+                        <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/alarmactive/alarmactive.html">
+                            <i class='bx bx-alarm'></i> Alarm Active
+                        </a>
+                        <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/alarmhistory/alarmhistory.html".html">
+                            <i class='bx bx-history'></i> Alarm History
+                        </a>
+                    </div>
+                </li>
+                
+                
+                <li class="tooltip-element" data-tooltip="6">
+                    <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/changedpassword/changepassword.html" data-active="6">
+                        <div class="icon">
+                            <i class='bx bx-cog'></i>
+                            <i class='bx bxs-cog'></i>
+                        </div>
+                        <span class="link hide">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    
+        <div class="sidebar-footer">
+            <a href="#" class="account tooltip-element" data-tooltip="0">
+                <i class='bx bx-user'></i>
+            </a>
+            <div class="admin-user tooltip-element" data-tooltip="1">
+                <div class="admin-profile hide">
+                    <img src="images/Picture5.png" alt="">
+                    <div class="admin-info">
+                        <h3>Mupa J</h3>
+                        <h5>SCADA Designer</h5>
+                    </div>
+                </div>
+                <a href="logout.html" class="log-out">
+                    <i class='bx bx-log-out'></i>
+                </a>
+            </div>
+            <div class="tooltip">
+                <span class="show">Mupa J</span>
+                <span>Logout</span>
+            </div>
+        </div>
+    </nav>
+    </body>
+    <main id="main-content">
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'DataTable')">Data Table</button>
+            <button class="tablinks" onclick="openTab(event, 'DataGraph')">Data Graph</button>
+            <button class="tablinks" onclick="openTab(event, 'PowerQuality')">Power Quality</button>
+            <button class="tablinks" onclick="openTab(event, 'DemandAnalysis')">Demand Analysis</button>
+        </div>
+
+
+        <!-- Data Table Tab -->
+        <div id="DataTable" class="tabcontent">
+            <!-- <h2>Data Table</h2> -->
+            <!-- Add your content for the Data Table tab here -->
+            <label for="customer_serial_number">Energy Meter ID:</label>
+            <select name="customer_serial_number" id="customer_serial_number">
+                <!-- Populate this dropdown with your energy meter IDs -->
+                <option value="28167148069191683">Energy Meter 1</option>
+                <option value="28167148069191683">Energy Meter 2</option>
+                <option value="28167148069191683">Energy Meter 3</option>
+                <option value="28167148069191683">Energy Meter 4</option>
+                <option value="28167148069191683">Energy Meter 5</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <!-- New dropdown for data type (Voltage LN, Voltage LL, Current) -->
+            <label for="datatype">Data Type:</label>
+            <select name="datatype" id="datatype">
+                <option value="Voltage Line to Neutral [V]">Voltage Line to Neutral [V]</option>
+                <option value="Voltage Line to Line [V]">Voltage Line to Line [V]</option>
+                <option value="Current [A]">Current [A]</option>
+            </select>
+
+            <!-- New date input for selecting a single date -->
+            <label for="selected_date">Select Date:</label>
+            <input type="date" id="date" name="date">
+            
+            <button onclick="fetchData()" class="custom-button">View Data</button>
+
+            <!-- Single button for exporting data to PDF or Excel -->
+            <button onclick="exportData('pdf')" class="custom-button">Export to PDF</button>
+            <button onclick="exportData('excel')" class="custom-button">Export to Excel</button>
+
+            <h4 id="dataInfo"></h4>
+
+            <div id="dataContainer">
+                <!-- Data table will be displayed here -->
+            </div>
+        </div>
+    <script>
+        // Add this function to set the current date as the default value
+        function setDefaultDate() {
+            var currentDate = new Date();
+            var day = String(currentDate.getDate()).padStart(2, '0');
+            var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+            var year = currentDate.getFullYear();
+            var formattedDate = year + '-' + month + '-' + day;
+            document.getElementById("date").value = formattedDate; // Set the date input field
+        }
+
+        // Call the function when the page loads
+        window.onload = function () {
+            setDefaultDate();
+            fetchData(); // Call fetchData to initially load data for the default date
+        };
+
+        // Function to fetch data, called on button click
+        function fetchData() {
+            var selectedEnergyMeterId = document.getElementById("customer_serial_number").value;
+            var selectedDate = document.getElementById("date").value;
+            var selectedDataType = document.getElementById("datatype").value;
+    
+            // Check if the date input is empty, and if so, set it to the current date
+            if (selectedDate === "") {
+                var currentDate = new Date();
+                var day = String(currentDate.getDate()).padStart(2, '0');
+                var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+                var year = currentDate.getFullYear();
+                selectedDate = year + '-' + month + '-' + day;
+                document.getElementById("date").value = selectedDate; // Update the date input field
+            }
+    
+            // AJAX request to fetch data
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = xhr.responseText;
+    
+                    // Filter out the specific data from the response
+                    response = filterSpecificData(response, selectedEnergyMeterId, selectedDate, selectedDataType);
+    
+                    document.getElementById("dataContainer").innerHTML = response;
+                }
+            };
+    
+            // Modify the URL to include the selected date
+            xhr.open("GET", "fetch_data_datatable.php?customer_serial_number=" + selectedEnergyMeterId + "&date=" + selectedDate + "&datatype=" + selectedDataType, true);
+            xhr.send();
+        }
+    
+        // Function to filter out specific data from the response
+        function filterSpecificData(response, energyMeterId, date, dataType) {
+            // Split the response into lines
+            var lines = response.split('\n');
+            
+            // Create a new array to store filtered lines
+            var filteredLines = [];
+    
+            // Flag to determine whether to include a line or not
+            var includeLine = true;
+    
+            // Iterate through lines and check if they match the specific data
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].trim();
+                var specificData = "Data for Energy Meter ID: " + energyMeterId + " and Date: " + date + " and Data Type: " + dataType;
+                
+                if (line === specificData) {
+                    // If the line matches the specific data, set the flag to false to exclude it
+                    includeLine = false;
+                } else if (line === "") {
+                    // If it's an empty line, reset the flag to true
+                    includeLine = true;
+                } else if (includeLine) {
+                    // If the flag is true, include the line in the filtered data
+                    filteredLines.push(line);
+                }
+            }
+    
+            // Join the filtered lines into a string and return
+            return filteredLines.join('\n');
+        }
+    
+        // Trigger fetchData function on button click
+        document.querySelector("button").addEventListener("click", fetchData);
+
+        //Function to export data to PDF or Excel
+        function exportData(format) {
+            var dataToExport = document.getElementById("dataContainer").innerText;
+
+            if (dataToExport) {
+                if (format === 'pdf') {
+                    var doc = new jsPDF();
+                    doc.text(dataToExport, 10, 10);
+                    doc.save("exported_data.pdf");
+                } else if (format === 'excel') {
+                    var wb = XLSX.utils.book_new();
+                    var ws = XLSX.utils.aoa_to_sheet([[dataToExport]]);
+                    XLSX.utils.book_append_sheet(wb, ws, "Exported Data");
+                    XLSX.writeFile(wb, "exported_data.xlsx");
+                }
+            } else {
+                alert("No data to export. Please fetch data first.");
+            }
+        }
+    </script>
+
+
+    <!-- Data Graph Tab -->
+    <div id="DataGraph" class="tabcontent">
+    <!-- <h2>Data Graph</h2> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+        <!-- <h2>Data Graph</h2> -->
+        <label for="customer_serial_number">Energy Meter ID:</label>
+        <select name="customer_serial_number" id="customer_serial_number">
+            <!-- Populate this dropdown with your energy meter IDs -->
+            <option value="28167148069191683">Energy Meter 1</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <!-- New dropdown for data type (Voltage LN, Voltage LL, Current) -->
+        <label for="datatype">Data Type:</label>
+        <select name="datatype" id="datatype">
+            <option value="Voltage Line to Neutral [V]">Voltage Line to Neutral [V]</option>
+            <option value="Voltage Line to Line [V]">Voltage Line to Line [V]</option>
+            <option value="Current [A]">Current [A]</option>
+            <option value="Active Power">Active Power</option>
+            <option value="Apparent Power">Apparent Power</option>
+            <option value="Reactive Power [var]">Reactive Power [var]</option>
+        </select>
+
+        <!-- New date input for selecting a single date -->
+        <label for="selected_date">Select Date:</label>
+        <input type="date" id="date" name="date">
+
+        <button onclick="fetchData()">View Data</button>
+
+        <!-- Single button for exporting data to PDF or Excel -->
+        <button onclick="exportData('pdf')" class="custom-button">Export to PDF</button>
+        <button onclick="exportData('excel')" class="custom-button">Export to Excel</button>
+
+        <h4 id="dataInfo"></h4>
+
+        <div id="chartContainer">
+            <!-- Line chart will be displayed here -->
+            <canvas id="lineChart"></canvas>
+        </div>
+
+        <div id="dataContainer">
+            <!-- Data table will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        var chart; // Global variable to store the chart instance
+
+// Function to fetch data, called on page load and when the "View Data" button is clicked
+function fetchData() {
+    var selectedEnergyMeterId = document.getElementById("customer_serial_number").value;
+    var selectedDate = document.getElementById("date").value;
+    var selectedDataType = document.getElementById("datatype").value;
+
+    // Check if the date input is empty, and if so, set it to the current date
+    if (selectedDate === "") {
+        var currentDate = new Date();
+        var day = String(currentDate.getDate()).padStart(2, '0');
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+        var year = currentDate.getFullYear();
+        selectedDate = year + '-' + month + '-' + day;
+        document.getElementById("date").value = selectedDate; // Update the date input field
+    }
+
+    // AJAX request to fetch data
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = xhr.responseText;
+            document.getElementById("dataContainer").innerHTML = response;
+            document.getElementById("dataInfo").textContent = "Energy Meter ID: " + selectedEnergyMeterId + ", Date: " + selectedDate + ", Data Type: " + selectedDataType;
+
+            // Extract data from the table and generate the chart
+            extractDataAndGenerateChart(selectedDataType);
+        }
+    };
+
+    // Modify the URL to include the selected date
+    xhr.open("GET", "fetch_data.php?customer_serial_number=" + selectedEnergyMeterId + "&date=" + selectedDate + "&datatype=" + selectedDataType, true);
+    xhr.send();
+}
+
+function extractDataAndGenerateChart(selectedDataType) {
+    // Extracting data from the table
+    var table = document.querySelector("table");
+    var tableData = [];
+    var headers = [];
+    var rows = table.querySelectorAll("tr");
+
+    // Extract table headers
+    var headerCells = rows[0].querySelectorAll("th");
+    for (var i = 0; i < headerCells.length; i++) {
+        headers.push(headerCells[i].textContent);
+    }
+
+    // Extract table rows
+    for (var i = 1; i < rows.length; i++) {
+        var rowData = {};
+        var cells = rows[i].querySelectorAll("td");
+        for (var j = 0; j < cells.length; j++) {
+            var parameter = headers[j];
+            var value = parseFloat(cells[j].textContent);
+            rowData[parameter] = value;
+        }
+        tableData.push(rowData);
+    }
+
+    // Extract X values (time) from the table data
+    var chartXValues = tableData.map(function (row) {
+        return row["Last Update"];
+    });
+
+    // Extract Y values based on the selected data type
+    var chartYValues = [];
+    var legendLabels = [];
+
+if (selectedDataType === 'Voltage Line to Neutral [V]') {
+chartYValues.push(tableData.map(function (row) {
+    return row["L1"];
+}));
+chartYValues.push(tableData.map(function (row) {
+    return row["L2"];
+}));
+chartYValues.push(tableData.map(function (row) {
+    return row["L3"];
+}));
+legendLabels = ["L1", "L2", "L3"];
+
+} else if (selectedDataType === 'Voltage Line to Line [V]') {
+chartYValues.push(tableData.map(function (row) {
+    return row["L12"];
+}));
+chartYValues.push(tableData.map(function (row) {
+    return row["L32"];
+}));
+chartYValues.push(tableData.map(function (row) {
+    return row["L13"];
+}));
+legendLabels = ["L12", "L32", "L13"];
+
+} else if (selectedDataType === 'Current [A]') {
+chartYValues.push(tableData.map(function (row) {
+    return row["I1"];
+}));
+chartYValues.push(tableData.map(function (row) {
+    return row["I2"];
+}));
+chartYValues.push(tableData.map(function (row) {
+    return row["I3"];
+}));
+legendLabels = ["I1", "I2", "I3"];
+
+}else if (selectedDataType === 'Active Power') {
+chartYValues.push(tableData.map(function (row) {
+return row["A_P_L1"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+chartYValues.push(tableData.map(function (row) {
+return row["A_P_L2"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+chartYValues.push(tableData.map(function (row) {
+return row["A_P_L3"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+legendLabels = ["A_P_L1", "A_P_L2", "A_P_L3"];
+
+}else if (selectedDataType === 'Apparent Power') {
+chartYValues.push(tableData.map(function (row) {
+return row["App_P_L1"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+chartYValues.push(tableData.map(function (row) {
+return row["App_P_L2"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+chartYValues.push(tableData.map(function (row) {
+return row["App_P_L3"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+legendLabels = ["App_P_L1","App_P_L4","App_P_L3"];
+
+}else if (selectedDataType === 'Reactive Power [var]') {
+chartYValues.push(tableData.map(function (row) {
+return row["R_P_L1"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+chartYValues.push(tableData.map(function (row) {
+return row["R_P_L2"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+chartYValues.push(tableData.map(function (row) {
+return row["R_P_L3"];  // This assumes there's a column named "ActivePower" in your table.
+}));
+legendLabels = ["R_P_L1","R_P_L2","R_P_L3"];
+}
+
+
+    // Remove the existing chart if it exists
+    if (chart) {
+        chart.destroy();
+    }
+
+    // Create the Highcharts chart with the specified background color
+    chart = Highcharts.chart('chartContainer', {
+        chart: {
+            type: 'line',
+            backgroundColor: '#111C44' // Set the background color here
+        },
+        title: {
+            text: 'Energy Meter Data',
+            style: {
+                color: '#f2f2f2' // Font color for the chart title
+            }
+        },
+        
+        xAxis: {
+            type: 'category', // Use 'category' scale for X-axis
+            categories: chartXValues,
+            title: {
+                display: true,
+                text: 'Time',
+                style: {
+                    color: '#f2f2f2' // Font color for the X-axis title
+                }
+            },
+            labels: {
+                style: {
+                    color: '#f2f2f2' // Font color for X-axis labels
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: selectedDataType,
+                style: {
+                    color: '#f2f2f2' // Font color for the Y-axis title
+                }
+            },
+            labels: {
+                style: {
+                    color: '#f2f2f2' // Font color for Y-axis labels
+                }
+            }
+        },
+        legend: {
+            itemStyle: {
+                color: '#f2f2f2', // Font color for legend items
+                backgroundColor : '#72A0C1'
+            }
+        },
+        tooltip: {
+        backgroundColor: 'rgba(17, 28, 68, 0.9)', // Transparent background
+        borderWidth: 0, // No border
+        shadow: false, // No shadow
+        style: {
+        color: '#f2f2f2' // Font color for tooltip text
+}
+},
+        series: []
+    });
+
+    // Add series data
+    for (var i = 0; i < chartYValues.length; i++) {
+        chart.addSeries({
+            name: legendLabels[i],
+            data: chartYValues[i]
+        });
+    }
+}
+
+// Trigger fetchData function on page load
+fetchData();
+    </script>
+    
+</div>
+</div>
+
+        <!-- Power Quality Tab -->
+<div id="PowerQuality" class="tabcontent">
+    <!-- <h2>Power Quality</h2> -->
+    <label for="customer_serial_number">Energy Meter ID:</label>
+    <select name="customer_serial_number" id="customer_serial_number">
+        <!-- Populate this dropdown with your energy meter IDs -->
+        <option value="28167148069191683">Energy Meter 1</option>
+        <option value="28167148069191683">Energy Meter 2</option>
+        <option value="28167148069191683">Energy Meter 3</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <!-- New dropdown for data type (Power Factor, Total Harmonic Distortion, Total Harmonic Current) -->
+    <label for="datatype">Data Type:</label>
+    <select name="datatype" id="datatype">
+        <option value="Power Factor">Power Factor</option>
+        <option value="Total Harmonic Distortion [THD U]">Total Harmonic Distortion [THD U]</option>
+        <option value="Total Harmonic Current [THD I]">Total Harmonic Current [THD I]</option>
+    </select>
+
+    <!-- New date input for selecting a single date -->
+    <label for="selected_date">Select Date:</label>
+    <input type="date" id="date" name="date">
+
+    <button onclick="fetchData()" style="background-color: #032291; color: #f2f2f2;">View Data</button>
+            <button onclick="exportToCSV()" style="background-color: #032291; color: #f2f2f2;">Export to CSV</button>
+
+    <h4 id="dataInfo"></h4>
+
+    <div id="chartContainer">
+        <!-- Line chart will be displayed here -->
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <div id="dataContainer">
+        <!-- Data table will be displayed here -->
+    </div>
+</div>
+
+<style>
+</style>
+
+<script>
+</script>
+        <!-- Demand Analysis Tab -->
+        <div id="DemandAnalysis" class="tabcontent">
+            <!-- <h2>Demand Analysis</h2> -->
+            <!-- Add your content for the Demand Analysis tab here -->
+            <label for="customer_serial_number">Select Energy Meter ID:</label>
+            <select name="customer_serial_number" id="customer_serial_number">
+                <!-- Populate this dropdown with your energy meter IDs -->
+                <option value="28167148069191683">Meter 1</option>
+                <option value="28167148069191683">Meter 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        
+            <!-- Date filter by day -->
+            <div class="date-filter day-filter active-filter">
+                <label for="day">Select Day:</label>
+                <input type="text" name="day" id="day" placeholder="Select Day" readonly>
+            
+        </select>
+            <!-- Date filter by month -->
+            <div class="date-filter month-filter">
+                <label for="month">Select Month:</label>
+                <select name="month" id="month">
+                    <!-- Populate with month options dynamically using JavaScript -->
+                </select>
+                <select name="year-month" id="year-month">
+                    <!-- Populate with year options dynamically using JavaScript -->
+                </select>
+            
+        
+            <!-- Date filter by year -->
+            <div class="date-filter year-filter">
+                <label for="year">Select Year:</label>
+                <select name="year" id="year">
+                    <!-- Populate with year options dynamically using JavaScript -->
+                </select>
+            
+        
+            <label for="dateFilter">Select Date Filter:</label>
+            <input type="radio" name="dateFilter" value="day" checked> Day
+            <input type="radio" name="dateFilter" value="month"> Month
+            <input type="radio" name="dateFilter" value="year"> Year
+        
+            <button onclick="fetchData()" style="background-color: #032291; color: #f2f2f2;">View Data</button>
+            <button onclick="exportToCSV()" style="background-color: #032291; color: #f2f2f2;">Export to CSV</button>
+        
+            <h4 id="dataInfo" style="color: #f2f2f2;"></h4>
+        
+            <div id="chartContainer">
+                <!-- Highcharts chart will be displayed here -->
+            </div>
+        
+            <div id="dataContainer">
+                <!-- Data table will be displayed here -->
+            </div>
+        </div>
+        
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for tabs and other functionality
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+        
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+        
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active-tab", "");
+            }
+        
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active-tab";
+        }
+
+    </script>
+    <!-- Footer -->
+    <footer>
+        <!-- Footer content and links -->
+        <p>&copy; 2023 Reactive Energy Sdn Bhd | Energy Monitoring System</p>
+    </footer>
+    <script src="demandanalysis.js"></script>
+    <script src="datagraph.js"></script>
+    <!-- <script src="alarmactive.js"></script> -->
+    <script src="./alarmhistory/alarmhistory.js"></script>
+    <script src="./companymanagement/companymanagement.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

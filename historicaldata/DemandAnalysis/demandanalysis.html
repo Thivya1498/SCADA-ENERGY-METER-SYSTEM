@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Meter Data</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/full-screen.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        /* Styling for body and general elements */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #0B1437;
+            color: aliceblue;
+        }
+
+        /* Styling for the table and its headers */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            color: aliceblue;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #0d1e50;
+            color: white;
+        }
+
+        /* Styling for form elements */
+        select, input, button {
+            margin: 10px;
+            padding: 5px;
+        }
+        rect.highcharts-background
+    {
+        background-color: #0d1e50;
+    }
+    </style>
+</head>
+
+<body>
+
+<!-- Selection Criteria -->
+<div>
+    <!-- Energy Meter ID -->
+    <select id="meterID">
+        <option value="1">Meter 1</option>
+        <option value="2">Meter 2</option>
+    </select>
+
+    <!-- Month Selection -->
+    <input type="month" id="monthSelection">
+
+    <!-- Days of the Week -->
+    <div>
+        <label><input type="checkbox" value="Monday" checked>Monday</label>
+        <label><input type="checkbox" value="Tuesday" checked>Tuesday</label>
+        <label><input type="checkbox" value="Wednesday" checked>Wednesday</label>
+        <label><input type="checkbox" value="Thursday" checked>Thursday</label>
+        <label><input type="checkbox" value="Friday" checked>Friday</label>
+        <label><input type="checkbox" value="Saturday" checked>Saturday</label>
+        <label><input type="checkbox" value="Sunday" checked>Sunday</label>
+    </div>
+
+    <!-- Interval -->
+    <select id="intervalSelection">
+        <option value="15">15 minutes</option>
+        <option value="30">Half Hour</option>
+        <option value="60">One Hour</option>
+    </select>
+
+    <!-- View Data Button -->
+    <button onclick="generateData()">View Data</button>
+</div>
+
+<!-- Graph Container -->
+<div id="chartContainer" style="height: 400px;"></div>
+
+<!-- Data Table -->
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Interval</th>
+            <th>kWh</th>
+        </tr>
+    </thead>
+    <tbody id="dataTable"></tbody>
+</table>
+
+<script>
+    function generateData() {
+        // Extract user selections
+        let meterID = document.getElementById('meterID').value;
+        let month = document.getElementById('monthSelection').value;
+        let days = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+        let interval = document.getElementById('intervalSelection').value;
+
+        // Generate dummy data
+        let data = [];
+        let startDate = new Date(month);
+        let endDate = new Date(new Date(month).setMonth(startDate.getMonth() + 1));
+        while (startDate < endDate) {
+            if (days.includes(startDate.toLocaleDateString('en-US', { weekday: 'long' }))) {
+                data.push({
+                    date: startDate.toLocaleDateString(),
+                    time: `${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}`,
+                    maxPower: Math.floor(Math.random() * 100) // Random kWh value
+                });
+                startDate.setMinutes(startDate.getMinutes() + parseInt(interval));
+            } else {
+                startDate.setDate(startDate.getDate() + 1);
+                startDate.setHours(0, 0, 0, 0);
+            }
+        }
+
+        // Plot on Highcharts
+        Highcharts.chart('chartContainer', {
+            chart: {
+                type: 'column',
+                events: {
+                    load: function() {
+                        var chart = this,
+                            options = chart.options.exporting.buttons.contextButton.menuItems;
+                        if (chart.fullscreen) {
+                            options.unshift({
+                                text: 'Toggle Fullscreen',
+                                onclick: function() {
+                                    chart.fullscreen.toggle();
+                                }
+                            });
+                        }
+                    }
+                }
+            },
+            title: {
+                text: 'Demand [kWh]'
+            },
+            xAxis: {
+                title: {
+                    text: 'Interval'
+                },
+                categories: data.map(d => d.time)
+            },
+            yAxis: {
+                title: {
+                    text: 'kWh'
+                }
+            },
+            series: [{
+                name: 'kWh',
+                data: data.map(d => d.maxPower)
+            }],
+            exporting: {
+                buttons: {
+                    contextButton: {
+                        menuItems: ['viewFullscreen', 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG']
+                    }
+                }
+            }
+        });
+
+        // Populate the table
+        let tableBody = document.getElementById('dataTable');
+        tableBody.innerHTML = data.map(d => `
+            <tr>
+                <td>${d.date}</td>
+                <td>${d.time}</td>
+                <td>${d.maxPower} kWh</td>
+            </tr>
+        `).join('');
+    }
+</script>
+</body>
+
+</html>

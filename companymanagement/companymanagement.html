@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Management</title>
+    <link rel="stylesheet" href="companymanagement.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="sidemenustyle.css">
+    <style>
+        /* CSS for the dropdown menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+    
+        /* Style for the main menu item */
+        .dropdown .dropdown-toggle {
+            padding: 10px;
+            color: #fff;
+            cursor: pointer;
+        }
+    
+        /* Style for the dropdown content (hidden by default) */
+        .dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #2b528d;
+            min-width: 160px;
+            height: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            border-radius: 4px;
+        }
+    
+        /* Style for the dropdown items */
+        .dropdown .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #fff;
+        }
+    
+        /* Change color on hover */
+        .dropdown .dropdown-content a:hover {
+            background-color: #2b528d;
+        }
+    
+        /* Show the dropdown content when hovering over or clicking the main menu item */
+        .dropdown:hover .dropdown-content,
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+      </style>
+</head>
+<body>
+    <nav>
+        <div class="sidebar-top">
+          <span class="shrink-btn">
+              <i class='bx bx-chevron-left'></i>
+          </span>
+          <img src="images/RE - Logo.png" class="logo" alt="">
+          <h3 class="hide">Reactive Energy</h3>
+      </div>
+    
+      <div class="search">
+          <i class='bx bx-search'></i>
+          <input type="text" class="hide" placeholder="Quick Search ...">
+      </div>
+    
+      <div class="sidebar-links">
+          <ul>
+              <li class="tooltip-element" data-tooltip="0">
+                  <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/homepage/homepage.html" class="active" data-active="0">
+                      <div class="icon">
+                          <i class='bx bx-home'></i>
+                          <i class='bx bxs-home'></i>
+                      </div>
+                      <span class="link hide">Home</span>
+                  </a>
+              </li>
+    
+              <li class="tooltip-element" data-tooltip="1">
+                  <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/realtimedashboard/dash2.html" data-active="1">
+                      <div class="icon">
+                          <i class='bx bxs-dashboard'></i>
+                          <i class='bx bxs-dashboard'></i>
+                      </div>
+                      <span class="link hide">Dashboard</span>
+                  </a>
+              </li>
+              
+              <li class="tooltip-element" data-tooltip="2">
+                  <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/reportanalysis/reportanalysis.html" data-active="2">
+                      <div class="icon">
+                          <i class='bx bxs-report'></i>
+                          <i class='bx bxs-report'></i>
+                      </div>
+                      <span class="link hide">Analytic Data</span>
+                  </a>
+              </li>
+              
+              <li class="tooltip-element" data-tooltip="3">
+                  <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/historicaldata/historicalcombine.html" data-active="3">
+                      <div class="icon">
+                          <i class='bx bx-clipboard'></i>
+                          <i class='bx bx-clipboard'></i>
+                      </div>
+                      <span class="link hide">Historical Data</span>
+                  </a>
+              </li>
+              
+              <div class="dropdown" data-tooltip="4">
+                <a href="#" class="dropdown-toggle" data-active="4">
+                    <div class="icon">
+                        <i class='bx bx-cog'></i>
+                        <i class='bx bxs-cog'></i>
+                    </div>
+                    Management
+                </a>
+                <div class="dropdown-content">
+                    <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/adddevice/adddevice.html" data-active="3">
+                        <div class="icon">
+                            <i class='bx bx-map'></i>
+                            <i class='bx bx-map'></i>
+                        </div>
+                        New Place
+                    </a>
+                    <a href="/SCADAEnergyMeterLatest/adddevice/adddevice.html" data-active="3">
+                        <div class="icon">
+                            <i class='bx bx-tachometer'></i>
+                            <i class='bx bx-tachometer'></i>
+                        </div>
+                        Add Device
+                    </a>
+                    <a href="/SCADAEnergyMeterLatest/companymanagement/companymanagement.html" data-active="3">
+                        <div class="icon">
+                            <i class='bx bx-tachometer'></i>
+                            <i class='bx bx-tachometer'></i>
+                        </div>
+                        Company Management
+                    </a>
+                </div>
+              </div>
+    
+              <li class="tooltip-element dropdown" data-tooltip="5">
+                  <a href="#" class="dropdown-toggle" data-active="5">
+                      <div class="icon">
+                          <i class='bx bx-bell'></i>
+                          <i class='bx bxs-bell'></i>
+                      </div>
+                      <span class="link hide">Alarm</span>
+                  </a>
+    
+    
+    
+                  <li class="tooltip-element" data-tooltip="3">
+                    <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/alarmactives/alarmactive.html" data-active="3">
+                        <div class="icon">
+                            <i class='bx bx-alarm'></i>
+                            <i class='bx bx-alarm'></i>
+                        </div>
+                        <span class="link hide">Alarm Active</span>
+                    </a>
+                </li>
+    
+                <li class="tooltip-element" data-tooltip="3">
+                    <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/alarmhistory/alarmhistory.html" data-active="3">
+                        <div class="icon">
+                            <i class='bx bx-history'></i>
+                            <i class='bx bx-history'></i>
+                        </div>
+                        <span class="link hide">Alarm History</span>
+                    </a>
+                </li>
+                
+              
+              
+              <li class="tooltip-element" data-tooltip="6">
+                  <a href="/WEB%20APP%20ENERGY%20METER/sidemenu/changedpassword/changepassword.html" data-active="6">
+                      <div class="icon">
+                          <i class='bx bx-cog'></i>
+                          <i class='bx bxs-cog'></i>
+                      </div>
+                      <span class="link hide">Settings</span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+      <div class="sidebar-footer">
+          <a href="#" class="account tooltip-element" data-tooltip="0">
+              <i class='bx bx-user'></i>
+          </a>
+          <div class="admin-user tooltip-element" data-tooltip="1">
+              <div class="admin-profile hide">
+                  <img src="images/Picture5.png" alt="">
+                  <div class="admin-info">
+                      <h3>Mupa J</h3>
+                      <h5>SCADA Designer</h5>
+                  </div>
+              </div>
+              <a href="logout.html" class="log-out">
+                  <i class='bx bx-log-out'></i>
+              </a>
+          </div>
+          <div class="tooltip">
+              <span class="show">Mupa J</span>
+              <span>Logout</span>
+          </div>
+      </div>
+    </nav>
+</body>
+
+<main id="main-content">
+    <div class="container">
+        <div class="tab">
+        <button class="tablinks active-tab" onclick="openTab(event, 'UserManagement')">User Management</button>
+        <button class="tablinks" onclick="openTab(event, 'CompanyInfo')">Company Info</button>
+        </div>
+    </div>        
+
+        <!-- User Management Tab -->
+        <div id="UserManagement" class="tabcontent">
+            <h2>User Management</h2>
+            <div class="search-form">
+                <input type="text" placeholder="Search by Username" id="usernameSearch">
+                <input type="text" placeholder="Search by Email" id="emailSearch">
+                <button class="search-btn" onclick="searchUsers()">Search</button>
+                <button class="reset-btn" onclick="resetSearch()">Reset</button>
+                <button class="add-btn" onclick="addUser()">Add New User</button>
+            </div>
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Username</th>
+                        <th>Role Name</th>
+                        <th>Company Name</th>
+                        <th>Mobile Number</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>user1</td>
+                        <td>Admin</td>
+                        <td>Company A</td>
+                        <td>+60 112110909</td>
+                        <td>user1@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td><input type="checkbox"></td>
+                        <td>user2</td>
+                        <td>Manager</td>
+                        <td>Company B</td>
+                        <td>+60 112110909</td>
+                        <td>user2@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                        </tr>
+                    <tr>
+                        
+                        <td><input type="checkbox"></td>
+                        <td>user1</td>
+                        <td>Admin</td>
+                        <td>Company A</td>
+                        <td>+60 112110909</td>
+                        <td>user1@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>user2</td>
+                        <td>Manager</td>
+                        <td>Company B</td>
+                        <td>+60 112110909</td>
+                        <td>user2@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>user1</td>
+                        <td>Admin</td>
+                        <td>Company A</td>
+                        <td>+60 112110909</td>
+                        <td>user1@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td><input type="checkbox"></td>
+                        <td>user2</td>
+                        <td>Manager</td>
+                        <td>Company B</td>
+                        <td>+60 112110909</td>
+                        <td>user2@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                        </tr>
+                    <tr>
+                        
+                        <td><input type="checkbox"></td>
+                        <td>user1</td>
+                        <td>Admin</td>
+                        <td>Company A</td>
+                        <td>+60 112110909</td>
+                        <td>user1@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>user2</td>
+                        <td>Manager</td>
+                        <td>Company B</td>
+                        <td>+60 112110909</td>
+                        <td>user2@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>user1</td>
+                        <td>Admin</td>
+                        <td>Company A</td>
+                        <td>+60 112110909</td>
+                        <td>user1@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td><input type="checkbox"></td>
+                        <td>user2</td>
+                        <td>Manager</td>
+                        <td>Company B</td>
+                        <td>+60 112110909</td>
+                        <td>user2@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                        </tr>
+                    <tr>
+                        
+                        <td><input type="checkbox"></td>
+                        <td>user1</td>
+                        <td>Admin</td>
+                        <td>Company A</td>
+                        <td>+60 112110909</td>
+                        <td>user1@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>user2</td>
+                        <td>Manager</td>
+                        <td>Company B</td>
+                        <td>+60 112110909</td>
+                        <td>user2@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>user1</td>
+                        <td>Admin</td>
+                        <td>Company A</td>
+                        <td>+60 112110909</td>
+                        <td>user1@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td><input type="checkbox"></td>
+                        <td>user2</td>
+                        <td>Manager</td>
+                        <td>Company B</td>
+                        <td>+60 112110909</td>
+                        <td>user2@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                        </tr>
+                    <tr>
+                        
+                        <td><input type="checkbox"></td>
+                        <td>user1</td>
+                        <td>Admin</td>
+                        <td>Company A</td>
+                        <td>+60 112110909</td>
+                        <td>user1@example.com</td>
+                        <td>Active</td>
+                        <td>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Reset Password"><i class="fas fa-sync-alt"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Modify User"><i class="fas fa-edit"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Delete User"><i class="fas fa-trash"></i></span>
+                            <span class="action-icon" data-toggle="tooltip" data-placement="top" title="Disable User"><i class="fas fa-ban"></i></span>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Company Info Tab -->
+    <div id="CompanyInfo" class="tabcontent">
+    <h2>Company Info</h2>
+    <form id="companyInfoForm" class="company-form">
+        <div class="form-group">
+            <label for="name">Company Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="companyCode">Company Code:</label>
+            <input type="text" id="companyCode" name="companyCode" required>
+        </div>
+
+        <div class="form-group">
+            <label for="adminEmail">Administrator Email:</label>
+            <input type="email" id="adminEmail" name="adminEmail" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address">
+        </div>
+
+        <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="longitude">Longitude:</label>
+            <input type="text" id="longitude" name="longitude">
+        </div>
+
+        <div class="form-group">
+            <label for="latitude">Latitude:</label>
+            <input type="text" id="latitude" name="latitude">
+        </div>
+
+        <div class="form-group">
+            <label for="currency">Currency:</label>
+            <select id="currency" name="currency">
+                <option value="MYR">MYR- Malaysian Ringgit</option>
+                <option value="USD">USD - United States Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="GBP">GBP - British Pound Sterling</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="INR">INR - Indian Rupee</option>
+                <option value="SGD">SGD - Singapore Dollar</option>
+                <option value="MYR">MYR - Malaysian Ringgit</option>
+                <option value="IDR">IDR - Indonesian Rupiah</option>
+                <option value="THB">THB - Thai Baht</option>
+                <option value="PHP">PHP - Philippine Peso</option>
+                <option value="VND">VND - Vietnamese Dong</option>
+                <option value="MMK">MMK - Myanmar Kyat</option>
+            </select>
+        </div>
+        <button class="save-btn" type="submit">Save</button>
+    </form>
+</div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <script src="companymanagement.js"></script>
+    <script>
+        // JavaScript to toggle the active class for the dropdown menu
+        document.querySelector('.dropdown-toggle').addEventListener('click', function() {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.classList.toggle('active');
+        });
+    </script>
+</main>
+</body>
+</html>
