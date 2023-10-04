@@ -27,6 +27,7 @@
   height: 750px;
   width: 1700px;
   position: relative;
+  z-index: 1;
 }
 .wrapper {
   /* max-width: 900px; */
