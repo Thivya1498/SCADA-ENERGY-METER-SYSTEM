@@ -67,7 +67,7 @@
   font-family: verdana;
   font-weight: bold;
   margin: 0 auto;
-  transition: background .5s linear;
+  transition:.5s linear;
   cursor: pointer;
 }
 .flip-me:hover,
@@ -137,7 +137,7 @@
   padding: 10px 20px;
   border-radius: 8px;
   text-transform: uppercase;
-  transition: background .5s linear;
+  transition:.5s linear;
   cursor: pointer;
 }
 .flip-me2:hover,
@@ -680,13 +680,14 @@
   position: static;
 }
 .real-data {
-  color: #191717;
+  border: none;
   text-align:center;
   font: 500 14px/20px "Roboto", sans-serif;
   position: absolute;
   left: 212px;
   top: 8px;
-  width:80px;
+  width: 80px;
+  background-color: transparent;
 }
 .chevron-right {
   position: absolute;
