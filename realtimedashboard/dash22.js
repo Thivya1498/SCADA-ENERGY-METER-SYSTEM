@@ -627,7 +627,7 @@
       },
       yaxis: {
           title: {
-              text: 'A.Power (V)',
+              text: 'Active.Power (V)',
               style: {
               color: 'white' // Set x-axis label text color to white
             }
@@ -690,7 +690,7 @@
     },
     yaxis: {
         title: {
-            text: 'A.Power (V)',
+            text: 'React.Power (V)',
             style: {
             color: 'white' // Set x-axis label text color to white
           }
@@ -753,7 +753,7 @@ const chartOptions6 = {
     },
     yaxis: {
         title: {
-            text: 'A.Power (V)',
+            text: 'Apprt.Power (V)',
             style: {
             color: 'white' // Set x-axis label text color to white
           }
@@ -816,7 +816,7 @@ const chartOptions7 = {
     },
     yaxis: {
         title: {
-            text: 'A.Power (V)',
+            text: 'Agl Volt.Power (V)',
             style: {
             color: 'white' // Set x-axis label text color to white
           }
@@ -879,7 +879,7 @@ const chartOptions8 = {
     },
     yaxis: {
         title: {
-            text: 'A.Power (V)',
+            text: 'Agl Current.Power (V)',
             style: {
             color: 'white' // Set x-axis label text color to white
           }
@@ -942,7 +942,7 @@ const chartOptions9 = {
     },
     yaxis: {
         title: {
-            text: 'A.Power (V)',
+            text: 'Frequency.Power (V)',
             style: {
             color: 'white' // Set x-axis label text color to white
           }
@@ -1004,7 +1004,7 @@ const chartOptions10 = {
     },
     yaxis: {
         title: {
-            text: 'A.Power (V)',
+            text: 'T.Harmonic.Power (V)',
             style: {
             color: 'white' // Set x-axis label text color to white
           }
@@ -1067,7 +1067,7 @@ const chartOptions12 = {
     },
     yaxis: {
         title: {
-            text: 'A.Power (V)',
+            text: 'PF.Power (V)',
             style: {
             color: 'white' // Set x-axis label text color to white
           }
