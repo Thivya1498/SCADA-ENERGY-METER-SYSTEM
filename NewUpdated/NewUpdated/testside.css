@@ -1,0 +1,332 @@
+/* Reset some default styles for better consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Before */
+.body {
+    z-index: 1000;
+    position: absolute; /* Change this to a different value */
+  }
+  
+  /* After */
+  .body {
+    z-index: 1000;
+    position: absolute; /* Change to a suitable value */
+  }
+body {
+    font-family: Arial, sans-serif;
+}
+/* Style the header */
+/* header {
+    background-color: #0d3360;
+    color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+} */
+
+/* Style the top header content */
+.top-header {
+        background-color: #0D3360;
+        border-radius: 10px;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: flex-end;
+        z-index: 999; /* Ensure a high z-index value */
+        color: #fff;
+        margin-top: 0px;
+        margin-bottom: 10px;
+        width: 100%;
+        }
+
+/* Style the side menu */
+.side-menu {
+    background-color: #0d3360;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 250px;
+    color: #fff;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3; /* Add a higher z-index value */
+    padding: 1rem 1rem; /* Correct the padding syntax */
+    border-radius: 20px;
+    margin: 10px;
+    margin-bottom: 10px;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-menu ul li {
+    padding: 10px;
+    /* border-bottom: 1px solid #07509a; */
+    transition: background-color 0.3s ease, border-radius 0.3s ease; /* Add transition properties */
+}
+
+.side-menu ul li a {
+    text-decoration: none;
+    color: #fffcfc;
+    display: block;
+    margin: 5px;
+}
+
+/* Style submenus */
+.submenu-content {
+    display: none;
+    background-color: #0d3360;
+    padding: 20px;
+    margin-top: 5px;
+}
+
+
+.side-menu ul li:hover .submenu-content {
+    display: block;
+    
+}
+/* Style open submenus */
+.submenu-content.submenu-open {
+    display: block;
+}
+/* Add a hover effect to menu items */
+.side-menu ul li:hover {
+    background-color: #2342b2; /* Change the background color on hover */
+    border-radius: 2px; /* Add rounded corners on hover */
+    transition: background-color 0.3s, border-radius 0.3s;
+}
+/* Style the active menu item */
+.side-menu ul li.active {
+    background-color: #2342b2; /* Change the background color for active item */
+    border-radius: 2px; /* Add rounded corners for active item */
+    transition: background-color 0.3s ease, border-radius 0.3s ease; /* Add transition properties */
+}
+
+
+/* Style the main content area */
+.content {
+    margin-left: 250px;
+    padding: 10px;
+    /* position:static; */
+}
+/* Adjust the z-index of the Swiper container */
+.swiper-container {
+    z-index: 1; /* Adjust the value as needed */
+}
+/* Style for the logo */
+.logo img {
+    width: 60px; /* Adjust the logo width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+.logo-and-name {
+    display: flex;
+    align-items: center;
+}
+.menu-header {
+    padding: 10px 5px;
+    /* background-color: #333; */
+    margin-bottom: 8px;
+}
+.menu-name {
+    color: white;
+    font-size: 18px;
+    margin-left: 10px; /* Add spacing between the logo and menu name */
+}
+/* Style for the user profile section */
+.user-profile {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    margin-top: auto; /* Push the user profile section to the bottom */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info img {
+    /* width: 30px; */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.user-role {
+    font-size: 14px;
+    color: #D3D3D3;
+    margin-bottom: 10px;
+}
+
+.logout-button {
+    background-color: transparent;
+    border: none;
+    color: red ; /* Add !important to ensure this color is applied */
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.logout-button:hover {
+    color: blue ; /* Add !important to ensure this hover color is applied */
+}
+.alarm-icon {
+    color: #e01010;
+    font-size: 28px;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer; /* Add a pointer cursor for interaction */
+    position: relative; 
+}
+
+.notification-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    /* padding: 2px; */
+    font-size: 12px;
+    position: absolute;
+    top: 42px;
+    right: 164px;
+    transform: translate(50%, -50%); /* position it on the top right corner of the bell icon */
+    width: 20px; /* set this to your desired size */
+    height: 20px; /* should be the same as width for a circle */
+    text-align: center;
+    line-height: 20px; /* should be the same as height */
+}
+.notification-icon {
+    position: relative;
+    margin-right: 10px;
+    animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    }
+    .alarm-icon {
+    animation: pulse 1s infinite;
+    }
+.language-select select  {
+            padding: 5px 10px;
+            background-color: #02275e;
+            border: 1px solid #2342b2;
+            border-radius: 2px;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+}
+/* Style the toggle button */
+#toggleSideMenu {
+    background-color: #0d3360;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Add a style for when the menu is hidden */
+.hidden {
+    transform: translateX(0); /* Bring the menu back on-screen */
+}
+/* Style the alarm popup */
+
+.alarm-popup {
+    background-color: rgb(7, 61, 131);
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    position: absolute;  /* absolute positioning */
+    top: 50px;  /* adjust this based on the icon's height */
+    right: 0;  /* align it to the right side of the icon */
+    width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: none;  /* initially hidden */
+    padding: 10px;
+    margin-right: 175px;
+}
+.alarm-message {
+    padding: 10px 15px;
+    /* border-bottom: 1px solid #f0f0f0; */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #5476b9; /* Light gray */
+    /* border: 1px solid #e0e0e0; Border color */
+    margin-bottom: 5px; /* Spacing between alarms */
+    border-radius: 2px; /* Rounded corners */
+}
+.alarm-message:last-child {
+    border-bottom: none; /* Removes border for the last alarm */
+}
+.alarm-message:hover {
+    background-color: #1658b9;
+}
+.see-all-link {
+    display: block;
+    background: linear-gradient(90deg, #0D3360, #2342b2);
+    text-align: center;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.see-all-link:hover {
+    background: linear-gradient(90deg, #2342b2, #0D3360);
+    color: #fff;
+}
+
+
+a.alarm-message.see-all-link {
+margin-top: 20px;
+}
+main .copyright {
+    margin-top: auto;
+    font-size: 0.9rem;
+  }
+  
+  main .copyright span {
+    color: var(--main-color);
+    font-weight: 500;
+    cursor: pointer;
+  }
+

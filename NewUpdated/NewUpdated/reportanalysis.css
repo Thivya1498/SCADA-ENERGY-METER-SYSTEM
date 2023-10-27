@@ -1,0 +1,366 @@
+.tabs {
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.tab {
+    /* flex: 1; */
+    padding: 15px;
+    text-align: center;
+    background-color: #0B1437;
+    border: 0px solid #d4d4d4;
+    transition: background-color 0.3s;
+    border-bottom: #007BFF;
+    border-bottom: 3px solid transparent;
+}
+
+.tab:hover {
+    background-color: #0B1437;
+    
+}
+/* Default styles for the tabs */
+.tab-button {
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    background-color: #0B1437; 
+}
+
+.tab.active {
+    border-bottom: 4px solid #007BFF;  /* Blue bottom border for active tab */
+    font-weight: bolder;
+}
+
+/* Reset some default styles for better consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styles for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1437;
+    padding: 10px;
+    color: #fff;
+}
+
+/* Card styles */
+.card {
+    margin-top: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #02275e;
+    box-shadow: 0 4px 6px rgba(0.5, 0.5, 0.5, 0.5);
+}
+.card-1 {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #001f4f;
+    box-shadow: 0 4px 6px rgba(0.7, 0.7, 0.7, 0.7);
+}
+.card-2 {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #02275e;
+    box-shadow: 0 4px 6px rgba(0.5, 0.5, 0.5, 0.5);
+    height: 740px;
+}
+@media (min-width: 768px) {
+    .card-comparison {
+        width: calc(50% - 20px); /* On larger screens, make the card half the width with spacing */
+    }
+}
+
+.card-pie-chart {
+    /* margin-top: 20px; */
+    padding: 20px;
+    border-radius: 20px;
+    flex-wrap: wrap; /* to allow for wrapping if necessary */
+    justify-content: space-between; /* evenly spaced pie charts */
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; 
+    justify-items: center;
+    background-color: #02275e;
+    /* box-shadow: 0 4px 6px rgba(0.5, 0.5, 0.5, 0.5); */
+}
+
+.chart-container.pie-chart {
+    flex: 1; /* each chart takes an equal width */
+    max-width: 50%; /* each chart can take a maximum of half the container's width */
+    background-color: #02275e;
+}
+
+
+.card-pie-chart h2 {
+    text-align: center; /* Center the text */
+    width: 100%; /* Ensure it spans the entire width of its container */
+    margin: 0; /* Reset margins */
+    padding: 10px 0; /* Add some padding, adjust as needed */
+    order: 1; /* If using Flexbox or Grid, ensure it comes before the charts */
+}
+h1 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    color: #fff; /* Font color for table cells */
+}
+
+/* Set a specific height for the chart containers */
+.chart-container, .table-container {
+    height: 300px;
+}
+
+/* Display pie charts side by side */
+.pie-chart-container {
+    display: flex;
+    justify-content: space-between;  /* This will give some space between the charts if needed */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* background-color: #fff; */
+    color: #000;
+}
+
+th:first-child {
+width: 50px; /* Adjust the width of the Select column */
+}
+
+tr:nth-child(even) {
+background-color: #5f6b9e2a; /* Darker row background */
+}
+
+/* Beautify the "Select Time" input */
+#selectTime {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #1d1a1a; /* Font color for input */
+}
+
+/* Beautify the "View Data" button */
+#viewComprehensiveData {
+    padding: 10px 20px;
+    background-color: #0a66c3;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+#viewData {
+    padding: 10px 20px;
+    background-color: #0a66c3;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* Adjust the size of the chart containers */
+.chart-container {
+    height: 100%;
+}
+
+.select-time-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Add some space between label and input */
+    background-color: #4d7ea9;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.select-plant-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Add some space between label and input */
+    margin-right: 10px;
+}
+
+input#plantName
+{
+    margin-right: 10px;
+    margin-bottom: 0PX;
+}
+
+/* Beautify the "Select Time" label */
+.select-time-label {
+    color: #fff;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+h1{
+    margin-bottom: 10px;
+}
+
+
+
+/* Set a specific aspect ratio for the chart container */
+.chart-container {
+width: 100%; /* Width set to 100% for responsiveness */
+/* padding-bottom: 60%;  */
+position: relative; /* Position relative for padding-bottom to work */
+/* background-color: #02275e;  */
+/* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); */
+border-radius: 20px;
+}
+
+/* Form element styles */
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"]
+{
+    padding: 10px;
+    /*margin-bottom: 10px;*/
+    margin-left: 10px;
+     margin-right: 10px; 
+    border: 0px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    padding: 10px;
+    /* margin-bottom: 10px; */
+    margin-left: 10px;
+    margin-right: 10px; 
+    border: 0px solid #ccc;
+    border-radius: 5px;
+}
+
+input#MeterIds
+{
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#comparisonChart, 
+#overallConsumptionChart, 
+#dailyConsumptionByDayChart, 
+#dailyConsumptionByDayOfWeekChart, 
+#weekdaysWeekendsPieChart, 
+#dayOfWeekPieChart, 
+#activePowerHistoryChart {
+    background-color: transparent;
+}
+
+.comprehensive-charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chart-box {
+    width: calc(50% - 10px);  /* taking into account the gap */
+    box-sizing: border-box; 
+    padding: 20px;
+    background-color: #02275e;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.chart-container {
+    height: 300px; 
+}
+
+
+@media (max-width: 768px) {
+    .comprehensive-charts-container {
+        flex-direction: column;
+    }
+
+    .chart-box {
+        flex-basis: 100%;
+    }
+}
+
+h2 {
+    /* display: block; */
+    font-size: 1.5em;
+    /* margin-block-start: 0.83em; */
+    /* margin-block-end: 0.83em; */
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* Global styling for scrollbar */
+body::-webkit-scrollbar {
+    width: 10px;  /* Width of the scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #2E2E2E;  /* Color of the track of scrollbar */
+    border-radius: 10px; /* Rounded corners for track */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #555;  /* Color of the scroll thumb */
+    border-radius: 10px; /* Rounded corners for thumb */
+    border: 2px solid transparent; /* Lets the thumb "float" with some space around it */
+    background-clip: content-box; /* Avoids the border to be colored */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #999;  /* Color of the thumb when you hover over it */
+}
+
+body::-webkit-scrollbar-corner {
+    background-color: transparent; /* Makes right bottom corner transparent */
+}
+.icon {
+    font-size: 24px; /* Adjust the size of the icon */
+    margin-right: 10px; /* Add spacing between the icon and the text */
+  }
+  

@@ -1,0 +1,63 @@
+/* Styling for body and general elements */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #0B1437;
+    color: aliceblue;
+}
+
+/* Styling for the table and its headers */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    color: aliceblue;
+    border-radius: 10px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #0d1e50;
+    color: white;
+}
+
+/* Styling for form elements */
+select, input, button {
+    margin: 10px;
+    padding: 5px;
+}
+rect.highcharts-background
+{
+    background-color: #0d1e50;
+}
+label {
+margin-right: 10px;
+font-weight: bold;
+color: #F1EFEF; /* Change to desired color */
+}
+
+select, input[type="date"], input[type="month"], button {
+    margin: 10px 0; /* Vertical spacing */
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners */
+    border-width:0px ;
+    margin-left: 0px;
+    margin-right: 15px;
+}
+
+button {
+    background-color: #0738e7; /* Green */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #007FFF; /* Darker green on hover */
+    transform-style: preserve-3d;
+    font-weight: bold;
+}

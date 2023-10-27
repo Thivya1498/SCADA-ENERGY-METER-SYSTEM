@@ -1,0 +1,209 @@
+/* CSS for User Management page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1437;
+    color: #ccc;
+    margin: 10px;
+}
+/* Basic styles for the search area */
+label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+h2
+{
+    /* font-size: 22px; */
+    /* margin-bottom: 10px; */
+    /* margin-top: 15px; */
+
+}
+
+input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+
+button {
+    background: linear-gradient(to right, #20379d, #0d0a68);
+    color: #fff;
+    margin-top: 10px;
+    border: 1px solid #cdd1d8;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-right: 10px; 
+}
+#cancelButton {
+    background-color: #949494;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+#okButton {
+    background-color: #0b1785;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+button:hover {
+    transform: scale(1.05);
+    font-weight: bold;
+}
+button#viewBtn {
+    border: 1px solid #cdd1d8;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #111C44;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    color: #dad5d5;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    /* font-weight: bold; */
+  }
+  
+  table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #111C44;
+  }
+  
+  table th {
+    background-color: #1b3282;
+  }
+  
+  th:first-child {
+    width: 50px; /* Adjust the width of the Select column */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #5f6b9e2a; /* Darker row background */
+  }
+
+/* Reset icon styles */
+.reset-icon {
+    cursor: pointer;
+    color: #cc7a00; /* Color for reset icon */
+    transition: color 0.2s; /* Transition effect on color change */
+}
+
+.reset-icon:hover {
+    cursor: pointer;
+    color: rgb(224, 235, 237); /* Hover color for reset icon */
+}
+
+/* Edit icon styles */
+.edit-icon {
+    cursor: pointer;
+    color: #007BFF; /* Color for edit icon */
+    transition: color 0.2s; /* Transition effect on color change */
+}
+
+.edit-icon:hover {
+    cursor: pointer;
+    color: #28A745; /* Hover color for edit icon */
+}
+
+/* Delete icon styles */
+.delete-icon {
+    cursor: pointer;
+    color: #DC3545; /* Color for delete icon */
+    transition: color 0.2s; /* Transition effect on color change */
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+    color: #FFC107; /* Hover color for delete icon */
+}
+
+/* Disable icon styles */
+.disable-icon {
+    cursor: pointer;
+    color: #96999c; /* Color for disable icon */
+    transition: color 0.2s; /* Transition effect on color change */
+}
+
+.disable-icon:hover {
+    cursor: pointer;
+    color: #39434d; /* Hover color for disable icon */
+}
+
+.dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #070707;
+    padding: 20px;
+    z-index: 2;
+    display: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    
+    /* width: 300px; Set the desired width of your modal */
+}
+
+.dialog i {
+    font-size: 24px;
+    color: #ff9900; /* Customize the icon color */
+}
+.dialog p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.dialog h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.dialog label {
+    display: block;
+    margin-top: 10px;
+}
+
+.dialog input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.dialog button {
+    margin-top: 10px;
+}
+
+img.company-image{
+    height: 34px;
+    width: 34px;
+    margin-right: 5px;
+  }
+
+  .company-info {
+    display: flex;
+    align-items: center;
+  }
+
+  span {
+   font-size: 18px;
+   align-content: center;
+   font-weight: bold;
+  }
+  
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    display: none;
+    z-index: 1000; /* Make sure it's above other elements */
+}

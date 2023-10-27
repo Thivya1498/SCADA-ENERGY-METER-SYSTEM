@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add device</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        th, td {
+        padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Add Energy Meter</h1>
+    <table>
+        <tbody>
+            <tr class="tr1">
+                <td width="200">Name</td>
+                <td>
+                    <input type="text" id="name" name="name">
+                </td>
+            </tr>
+            <tr class="tr2">
+        <td width="200">Protocol</td>
+    <td>
+    <select id="selectOption">
+        <option value="TCP">TCP</option>
+        <option value="RTU">RTU</option>
+    </select><br><br>
+    </td>
+    </tr>
+    <tr class="tr3"></tr>
+    <td width="200">Brand</td>
+    <td>
+        <select id="baudrate">
+            <option value="ABB">ABB</option>
+            <option value="DELAB">DELAB</option>
+            <option value="MIKRO">MIKRO</option>
+    </td>
+    <tr class="tr3"></tr>
+    <td width="200">Parameter</td>
+    <td>
+    <div id="formA" class="hidden">
+        <label for="Ip_Address">Ip Address:</label>
+        <input type="text" id="Ip_Address"><br><br>
+        <label for="Port">Port:</label>
+        <input type="text" id="Port"><br><br>
+    </div>
+
+    <div id="formB" class="hidden">
+        <label for="slave_id">Slave Id:</label>
+        <input type="text" id="slave_id"><br><br>
+        <label for="baudrate">Baudrate:</label>
+        <select id="baudrate">
+            <option value="1200">1200</option>
+            <option value="2400">2400</option>
+            <option value="4800">4800</option>
+            <option value="9600">9600</option>
+            <option value="19200">19200</option>
+            <option value="19200">38400</option>
+            <option value="19200">57600</option>
+            <option value="19200">115200</option>
+        </select><br><br>
+        <label for="parity">Parity:</label>
+        <select id="parity">
+            <option value="none">none</option>
+            <option value="odd">odd</option>
+            <option value="even">even</option>
+        </select><br><br>
+        <label for="databit">Data Bit:</label>
+        <select id="databit">
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select><br><br>
+        <label for="stopbit">Stop Bit:</label>
+        <select id="stopbit">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select><br><br>
+    </div>
+        </td>
+        <tr class="tr1"></tr>
+        <td colspan="2" align="center">
+            <button name="Add" id="add">Add</button>
+        </td>
+
+        </tbody>
+    </table>
+    <script>
+        const selectOption = document.getElementById("selectOption");
+        const formA = document.getElementById("formA");
+        const formB = document.getElementById("formB");
+
+        selectOption.addEventListener("change", function () {
+            if (selectOption.value === "TCP") {
+                formA.classList.remove("hidden");
+                formB.classList.add("hidden");
+            } else if (selectOption.value === "RTU") {
+                formB.classList.remove("hidden");
+                formA.classList.add("hidden");
+            } else {
+                formA.classList.add("hidden");
+                formB.classList.add("hidden");
+            }
+        });
+    </script>
+</body>
+
+</html>

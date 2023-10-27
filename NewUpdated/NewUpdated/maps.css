@@ -1,0 +1,610 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: Arial, sans-serif;
+  background-color: #0B1437;
+  /* display: flex; */
+  /* flex-direction: column; */
+  height: 100%;
+  overflow: hidden;
+  margin: 5px;
+}
+
+
+body.dark-mode {
+  background-color: #0B1437;
+  color: #ffffff;
+}
+
+body.dark-mode #map {
+  filter: brightness(0.9) contrast(1.2);
+}
+
+#map {
+  position: relative;
+  height: 80vh; /* Adjust this as per your requirement */
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.7);
+  border: solid 1px #0B1437;
+  z-index: 3; /* Lower z-index value */
+}
+.map-search {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 5px;
+  border-radius: 5px;
+  /* display: flex; */
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.map-search input,
+.map-search button {
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  /* z-index: 1000; */
+  
+}
+
+.map-search button:last-child {
+  margin-bottom: 0;
+  /* z-index: 1000; */
+}
+
+
+/* Toggle Switch CSS */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;  /* Adjust width */
+  height: 24px; /* Adjust height */
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 10px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; /* Adjust height - should be less than .switch height */
+  width: 20px;  /* Adjust width - should be less than .switch width */
+  left: 2px; /* Gap from left when OFF */
+  bottom: 2px; /* Gap from bottom, keeps the toggle centered */
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 10px;
+}
+
+input:checked + .slider {
+  background-color: #2196F3; /* Color when ON */
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px); /* Moves the toggle - adjust based on width difference */
+}
+
+.slider.round {
+  border-radius: 25px; /* Adjust as half of the .switch height */
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.dark-mode-label {
+  font-size: 16px; /* or any size you prefer */
+  margin-right: 5px; /* space between the text and the toggle switch */
+  vertical-align: middle; /* to align it vertically with the toggle switch */
+}
+
+
+.popup-content h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.popup-content p {
+  margin: 5px 0;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+#locationSearch {
+  padding: 8px;
+  width: 200px;  /* Width of the input field */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;  /* Adjust the font size for the input field */
+  margin-right: 5px;  /* Space between the search input and button */
+}
+
+
+#searchButton {
+  padding: 8px 12px;  /* Adjust padding to control button size */
+  font-size: 14px;    /* Adjust font size as per your preference */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #0a4bbc;
+  color: #fff;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+  
+}
+
+#searchButton:hover {
+  background-color: #093e92;  /* Slightly darker color for hover effect */
+}
+
+
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  /* margin-left: 10px; */
+  /* margin-right: 10px; */
+  background-color: #111C44;
+  border-radius: 20px;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.7);   
+  flex-wrap: wrap;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-right: 1px solid #e0e0e0;
+  flex: 1;
+  margin: 10px;
+  color: #e0e0e0;
+}
+
+.info-box:last-child {
+  border-right: none;
+}
+
+.icon-wrapper {
+  width: 68px;
+  height: 66px;
+  border-radius: 50%;
+  background-color: #D3E5FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.info-box img {
+  max-width: 80%;
+  max-height: 70%;
+}
+
+.info-box span {
+  font-size: 18px;
+  flex: 1;
+}
+
+.info-box p {
+  font-weight: bold;
+  /* margin: 5px 0 0; */
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .info-box {
+     flex-basis: 100%;
+     border-right: none;
+     /* margin: 10px 0; */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .info-box {
+     flex-direction: column;
+  }
+  
+  .info-box span {
+     font-size: 16px;
+  }
+
+  .info-box p {
+     font-size: 18px;
+  }
+}
+/* Setting base styles */
+.swiper-container, #map {
+  height: 60vh; /* 70% of the viewport height */
+  width: 100%;
+}
+
+/* For tablets and larger devices */
+@media (min-width: 768px) {
+  .swiper-container, #map {
+      height: 60vh;
+  }
+}
+
+/* For standard desktop screens and larger devices */
+@media (min-width: 992px) {
+  .swiper-container, #map {
+      height: 79vh;
+      /* position: relative; */
+  }
+}
+.swiper-button-prev {
+  margin-left: 5px;
+  left: 10px;
+  transition: color 0.3s ease;
+  color: #022adb;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(17, 121, 224, 0.7);
+  border-radius: 50%; /* makes the background circular */
+  padding: 5px; /* space between the arrow and the circular background */
+}
+
+.swiper-button-next {
+  margin-right: 5px;
+  right: 10px;
+  transition: color 0.3s ease;
+  color: #888;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(17, 121, 224, 0.7);
+  border-radius: 50%; /* makes the background circular */
+  padding: 5px; /* space between the arrow and the circular background */
+}
+.swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled, .swiper-button-prev, .swiper-button-next {
+  width: 32px; /* Adjust these values based on your preference */
+  height: 32px;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+  font-size: 18px; /* Adjust the arrow size */
+  font-weight: bold;
+  color: #eae5e5;
+}
+
+
+/* .switch .slider { */
+  /* Other styles... */
+  /* width: 50px;   */
+  /* height: 28px;  */
+/* } */
+/*  */
+/* .switch .slider:before { */
+  /* Other styles... */
+  /* width: 25px;   */
+  /* height: 25px;  */
+/* } */
+
+/* Table styling */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background-color: #1D2A4A; /* Dark background for contrast */
+}
+table th {
+  background-color: #1f3264;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #444;
+  color: #e0e0e0; /* Light grey color for text */
+}
+
+th:first-child {
+  width: 50px; /* Adjust the width of the Select column */
+}
+
+tr:nth-child(even) {
+  background-color: #5f6b9e2a; /* Darker row background */
+}
+
+/* For the checkbox column, we want to center content */
+td:first-child, th:first-child {
+  text-align: center;
+}
+
+
+/* Status indicator colors */
+.status-indicator.active {
+  background-color: green;
+}
+
+.status-indicator.inactive {
+  background-color: red;
+}
+
+.status-indicator.error {
+  background-color: yellow;
+}
+
+/* Search and management container styles */
+.plant-management-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-top: 5px;
+  background-color: #1D2A4A; /* Dark background */
+  border-radius: 10px;
+}
+
+/* Search and buttons style inside the management container */
+.plant-management-container input[type="text"],
+.plant-management-container button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.plant-management-container input[type="text"] {
+  flex-grow: 2; /* Makes the search input take more space */
+}
+
+/* Button styles */
+.plant-management-container button {
+  background-color: #4A79FA; /* Blue background */
+  color: #FFFFFF; /* White text */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.plant-management-container button:hover {
+  background-color: #3B68D1; /* Darker blue on hover */
+}
+
+/* Styles for modal (popup) */
+#newPlantModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  /* border: 1px solid #ddd; */
+  background-color: #1D2A4A;
+  color: #e0e0e0; /* Light grey color for text */
+  z-index: 1000;
+  width: 300px; /* Adjust as necessary */
+  border-radius: 10px;
+}
+
+ #newPlantModal input, #newPlantModal button {
+  display: block;
+  width: 100%;
+  margin-bottom: 0px;
+  padding: 8px;
+  border-radius: 5px;
+  border: solid 0px;
+}
+#newPlantModal label {
+  display: block;
+  width: 100%;
+  margin-bottom: 0px;
+  padding: 8px;
+  border-radius: 5px;
+  border: solid 0px;
+}
+
+
+button#cancelAdd
+{
+  background-color: darkred;
+  border-radius: 5px;
+  border: solid 0px;
+  margin-left: 10px;
+}
+button#savePlant
+{
+  background-color: rgb(9, 134, 69);
+  border-radius: 5px;
+  border: solid 0px;
+  /* margin-top: 10px; */
+  padding: 8px;
+}
+#newPlantModal button {
+  /* background-color: #4A79FA;  */
+  color: #FFFFFF; /* White text */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#newPlantModal button:hover {
+  background-color: #3B68D1; /* Darker blue on hover */
+}
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;  
+  vertical-align: middle;  
+}
+/* Add green background to selected rows */
+#plantsTable tr.selected {
+  background-color: #A8E6CF;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1px); /* This provides the blur effect */
+  z-index: 1050; /* This ensures the overlay appears below the modal */
+  display: none; /* Initially hidden */
+  /* background: rgba(0,0,0,0.3);  */
+}
+
+
+#newPlantModal {
+  /* Existing styles */
+  z-index: 1100; /* Above the overlay */
+  display: none; /* Initially hidden */
+}
+
+.new-plant-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  /* rest of your styles */
+}
+body.modal-open {
+  filter: blur(5px);
+  pointer-events: none; /* Disable interactions with background elements */
+}
+body.modal-blur::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(5px);
+  pointer-events: none;
+  z-index: 998; /* This will make sure it sits right below the modal */
+}
+/* Hide the default checkbox */
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+/* Style the custom checkbox */
+.custom-checkbox label {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+/* The checkmark */
+.custom-checkbox label::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    content: "";
+    background-color: transparent;
+}
+
+/* Style the checkmark when the checkbox is checked */
+.custom-checkbox input[type="checkbox"]:checked + label::after {
+    background-color: #4CAF50;
+    border: none;
+    content: "\2714"; /* Unicode character for a checkmark */
+    color: white;
+    text-align: center;
+    line-height: 16px;
+}
+.suggestion {
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.suggestion:hover {
+  background-color: #e0e0e0;
+}
+#stateList {
+  margin-top: 20px;
+}
+
+#stateList h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+#stateListItems {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  max-height: 100px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#stateListItems li {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+#stateListItems li:hover {
+  background-color: #f0f0f0;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}

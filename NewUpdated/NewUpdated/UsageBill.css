@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    margin-left: 20px;
+    background-color: #0B1437;
+    color: #e7dede;
+}
+
+h1, h2 {
+    color: #cdd1d8;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #111C44;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    color: #dad5d5;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;;
+  }
+
+th, td {
+    border: 1px solid #444;
+    padding: 10px 12px;
+    text-align: center;
+    color: #cdd1d8;
+}
+
+th {
+    background-color: #1f3264;
+    color: #e8dcdc;
+    font-weight: normal;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
+}
+
+.card {
+    background-color: #111C44;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.results-header {
+    margin-top: 10px;
+    font-weight: 500;
+    color: #eee7e7;
+}
+
+button {
+    background: linear-gradient(to right, #20379d, #0d0a68);
+    color: #fff;
+    margin-top: 10px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    font-weight: bold;
+}
+button#viewBtn {
+    border: 1px solid #cdd1d8;
+}
+
+label {
+    /* display: block; */
+    margin-bottom: 10px;
+}
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #f7f9fc;
+    border: 1px solid #ced4da;
+    padding: 8px 30px 8px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><path fill="%232C3E50" d="M7,10l5-5H2L7,10z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+#reportType {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+#meterId {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+#monthInput {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+#yearInput {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+#startDate, #endDate {
+    margin-left: 2px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+select:hover {
+border-color: #aab7c4;
+}
+
+select:focus {
+border-color: #667eea;
+outline: none;
+}
+
+#yearInput
+{
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+background-color: #f7f9fc;
+border: 1px solid #ced4da;
+padding:8px ;
+border-radius: 5px;
+font-size: 14px;
+cursor: pointer;
+}
+#monthInput
+{
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+background-color: #f7f9fc;
+border: 1px solid #ced4da;
+padding: 8px 20px 8px 10px;
+border-radius: 5px;
+font-size: 14px;
+cursor: pointer;
+}
+#startDate, #endDate
+{
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+background-color: #f7f9fc;
+border: 1px solid #ced4da;
+padding: 8px 20px 8px 10px;
+border-radius: 5px;
+font-size: 14px;
+cursor: pointer;
+}
+tr:nth-child(even) {
+background-color: #5f6b9e2a; /* Darker row background */
+}
+
+/* For the checkbox column, we want to center content */
+td:first-child, th:first-child {
+text-align: center;
+}

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Meter Data</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script> -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    
+    <style>
+        /* Global styling for scrollbar */
+        body::-webkit-scrollbar {
+            width: 10px;  /* Width of the scrollbar */
+        }
+
+        body::-webkit-scrollbar-track {
+            background-color: #2E2E2E;  /* Color of the track of scrollbar */
+            border-radius: 10px; /* Rounded corners for track */
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #555;  /* Color of the scroll thumb */
+            border-radius: 10px; /* Rounded corners for thumb */
+            border: 2px solid transparent; /* Lets the thumb "float" with some space around it */
+            background-clip: content-box; /* Avoids the border to be colored */
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: #999;  /* Color of the thumb when you hover over it */
+        }
+
+        body::-webkit-scrollbar-corner {
+            background-color: transparent; /* Makes right bottom corner transparent */
+        }
+
+        /* Basic CSS styles for the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0B1437;
+            color:#f2f2f2;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .container {
+            /* max-width: 800px;
+            margin: 0 auto; */
+            /* padding: 20px; */
+            background-color: #0B1437;
+            margin-left: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select , input[type="date"] {
+            /* width: 100%; */
+            padding: 10px;
+            margin-bottom: 20px;
+            /* margin-top: 10px; */
+            border-radius: 5px;
+            margin-right:10px ;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0E183F;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        button {
+            background: linear-gradient(to right, #20379d, #0d0a68);
+            color: #fff;
+            margin-top: 10px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: 2px solid #cdd1d8
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            font-weight: bold;
+        }
+
+        #chartContainer {
+        width: 100%;  
+        height: 40vh;  
+        }
+        canvas {
+        width: 100% !important;
+        height: 100% !important;
+        }
+        @media (max-width: 768px) {
+        table, th, td {
+        font-size: 12px; 
+        }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Power Quality</h3>
+
+         <!-- Location -->
+     <label>Plant Location:</label>
+     <select id="meterID">
+         <option value="1">Reactive Energy Sdn Bhd</option>
+         <!-- <option value="2">Meter 2</option> -->
+     </select>
+        <label for="customer_serial_number">Energy Meter ID:</label>
+        <select name="customer_serial_number" id="customer_serial_number">
+            <!-- Populate this dropdown with your energy meter IDs -->
+            <option value="28167148069191683">Energy Meter 1</option>
+            <!-- <option value="28167148069191683">Energy Meter 2</option> -->
+            <!-- <option value="28167148069191683">Energy Meter 3</option> -->
+            <!-- Add more options as needed -->
+        </select>
+    
+        <!-- New dropdown for data type (Voltage LN, Voltage LL, Current) -->
+        <label for="datatype">Data Type:</label>
+        <select name="datatype" id="datatype">
+            <option value="Power Factor">Power Factor</option>
+            <option value="Total Hormanic Distortion [THD U]">Total Hormanic Distortion [THD U]</option>
+            <option value="Total Hormanic Current [THD I]">Total Hormanic Current [THD I]</option>
+        </select>
+        
+        <!-- New date input for selecting a single date -->
+        <label for="selected_date">Select Date:</label>
+        <input type="date" id="date" name="date">
+      
+    
+        <button onclick="fetchData()">View Data</button>
+        <!-- Single button for exporting data to PDF or Excel -->
+        <!-- <button onclick="exportData('pdf')" class="custom-button">Export to PDF</button> -->
+        <!-- <button onclick="exportData('excel')" class="custom-button">Export to Excel</button> -->
+        <h4 id="dataInfo"></h4>
+    
+        <div id="chartContainer">
+            <!-- Line chart will be displayed here -->
+            <canvas id="lineChart" width="400" height="200"></canvas>
+        </div>
+    
+        <div id="dataContainer">
+            <!-- Data table will be displayed here -->
+        </div>
+    </div>
+    
+    <script>
+
+var lineChart; // Global variable to store the chart instance
+
+// Function to fetch data, called on page load and when the "View Data" button is clicked
+function fetchData() {
+    var selectedEnergyMeterId = document.getElementById("customer_serial_number").value;
+    var selectedDate = document.getElementById("date").value;
+    var selectedDataType = document.getElementById("datatype").value;
+
+    // Check if the date input is empty, and if so, set it to the current date
+    if (selectedDate === "") {
+        var currentDate = new Date();
+        var day = String(currentDate.getDate()).padStart(2, '0');
+        var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+        var year = currentDate.getFullYear();
+        selectedDate = year + '-' + month + '-' + day;
+        document.getElementById("date").value = selectedDate; // Update the date input field
+    }
+
+    // AJAX request to fetch data
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = xhr.responseText;
+            document.getElementById("dataContainer").innerHTML = response;
+            document.getElementById("dataInfo").textContent = "Energy Meter ID: " + selectedEnergyMeterId + ", Date: " + selectedDate + ", Data Type: " + selectedDataType;
+
+            // Extract data from the table and generate the chart
+            extractDataAndGenerateChart(selectedDataType);
+        }
+    };
+
+    // Modify the URL to include the selected date
+    xhr.open("GET", "fetch_data_powerquality.php?customer_serial_number=" + selectedEnergyMeterId + "&date=" + selectedDate + "&datatype=" + selectedDataType, true);
+    xhr.send();
+}
+
+function extractDataAndGenerateChart(selectedDataType) {
+    // Extracting data from the table
+    var table = document.querySelector("table");
+    var tableData = [];
+    var headers = [];
+    var rows = table.querySelectorAll("tr");
+
+    // Extract table headers
+    var headerCells = rows[0].querySelectorAll("th");
+    for (var i = 0; i < headerCells.length; i++) {
+        headers.push(headerCells[i].textContent);
+    }
+
+    // Extract table rows
+    for (var i = 1; i < rows.length; i++) {
+        var rowData = {};
+        var cells = rows[i].querySelectorAll("td");
+        for (var j = 0; j < cells.length; j++) {
+            var parameter = headers[j];
+            var value = parseFloat(cells[j].textContent);
+            rowData[parameter] = value;
+        }
+        tableData.push(rowData);
+    }
+
+    // Extract X values (time) from the table data
+    var chartXValues = tableData.map(function (row) {
+        return row["Last Update"];
+    });
+
+    // Extract Y values based on the selected data type
+    var chartYValues = [];
+    var legendLabels = [];
+
+    if (selectedDataType === 'Power Factor') {
+        chartYValues.push(tableData.map(function (row) {
+            return row["PF"];
+        }));
+       // chartYValues.push(tableData.map(function (row) {
+       //     return row["L2"];
+       // }));
+       // chartYValues.push(tableData.map(function (row) {
+       //     return row["L3"];
+       // }));
+        legendLabels = ["PF"];
+    } else if (selectedDataType === 'Total Hormanic Distortion [THD U]') {
+        chartYValues.push(tableData.map(function (row) {
+            return row["THD_L1"];
+        }));
+        chartYValues.push(tableData.map(function (row) {
+            return row["THD_L2"];
+        }));
+        chartYValues.push(tableData.map(function (row) {
+            return row["THD_L3"];
+        }));
+        legendLabels = ["THD_L1", "THD_L2", "THD_L3"];
+
+    } else if (selectedDataType === 'Total Hormanic Current [THD I]') {
+    chartYValues.push(tableData.map(function (row) {
+        return row["THD_L1"];
+    }));
+    chartYValues.push(tableData.map(function (row) {
+        return row["THD_L2"];
+    }));
+    chartYValues.push(tableData.map(function (row) {
+        return row["THD_L3"];
+    }));
+    chartYValues.push(tableData.map(function (row) {
+        return row["THD_N"]; // Include THD_N data
+    }));
+    legendLabels = ["THD_L1", "THD_L2", "THD_L3", "THD_N"];
+    }
+
+    // Remove the existing chart if it exists
+    // if (lineChart) {
+    //     lineChart.destroy();
+    // }
+
+    var seriesData = [];  // This array will store the dataset for Highcharts.
+
+    for (let i = 0; i < legendLabels.length; i++) {
+        seriesData.push({
+            name: legendLabels[i],
+            data: chartYValues[i]
+        });
+    }
+
+    // Now we use Highcharts to render the graph:
+    Highcharts.chart('chartContainer', {
+    chart: {
+        type: 'line',
+        backgroundColor: '#111C44'
+    },
+    title: {
+        text: selectedDataType,
+        style: {
+            color: '#FFFFFF'  // Set title color to white
+        }
+    },
+    xAxis: {
+        categories: chartXValues,
+        title: {
+            text: 'Time',
+            style: {
+                color: '#FFFFFF'  // Set x-axis title color to white
+            }
+        },
+        labels: {
+            style: {
+                color: '#FFFFFF'  // Set x-axis labels color to white
+            }
+        }
+    },
+    yAxis: {
+        title: {
+            text: selectedDataType,
+            style: {
+                color: '#FFFFFF'  // Set y-axis title color to white
+            }
+        },
+        labels: {
+            style: {
+                color: '#FFFFFF'  // Set y-axis labels color to white
+            }
+        }
+    },
+    series: seriesData,  
+    legend: {
+        itemStyle: {
+            color: '#f2f2f2'
+        }
+    },
+    tooltip: {
+        backgroundColor: '#111C44',
+        style: {
+            color: '#f2f2f2'
+        }
+    }
+});
+}
+
+fetchData();
+
+    </script>
+</body>
+</html>

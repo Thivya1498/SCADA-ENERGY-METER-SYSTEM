@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1437;
+    color: #ccc;
+    margin: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+#main-content {
+    background-color: #111C44; /* This gives a slightly different background to make the form stand out */
+    padding: 20px; /* Provide some spacing around the form content */
+    border-radius: 10px; /* Give it rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* A subtle shadow to make it pop out */
+    margin-left: 20px;
+    /* margin-top: 20px; */
+   
+}
+#main-content h1 {
+    color: #FFFFFF; /* Making the text white for better readability on the dark background */
+    text-align:start; /* Center align the title */
+    margin-bottom: 20px; /* Providing some spacing below the title */
+    font-size: 20px; /* Increase font size for prominence */
+    border-bottom: 2px solid #3B4758; /* A subtle underline */
+    padding-bottom: 10px; /* Spacing below the text to make it look good with the underline */
+}
+#main-content h1 i {
+    margin-right: 10px;  /* space between the icon and the text */
+    font-size: 1.2em;    /* adjust the size of the icon */
+    vertical-align: middle; /* vertically align the icon with the text */
+}
+
+
+form {
+    /* max-width: 600px; */
+    /* margin: 0 auto; */
+    padding: 5px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    
+}
+legend
+{
+    font-size: 18px;
+    margin-left: 3px;
+    
+}
+
+fieldset {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+input[type="text"],
+textarea {
+    width: 31.3%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    background-color: #f2f3f4;
+    color: #0c0c0c;
+}
+
+select#timezone, #country, #currency, #state, #city {
+    width: 31.2%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    background-color: #f2f3f4;
+    color: #0c0c0c;
+}
+
+textarea {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    background-color: #f2f3f4;
+    color: #0c0c0c;
+}
+
+textarea {
+    height: 100px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="button"] {
+    background-color: #ad240b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+}
+
+/* Add this to your addplace.css or a separate CSS file */
+#map {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 0px;
+ }
+ 
+ #selectLocation {
+    display: block;
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+ }
+
+#successModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}

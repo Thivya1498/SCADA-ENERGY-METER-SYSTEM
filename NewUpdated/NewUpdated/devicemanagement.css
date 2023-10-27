@@ -1,0 +1,271 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1437;
+    color: #f2f2f2;
+    /* margin: 10px; */
+    padding: 10px;
+}
+
+
+/* Table Styling */
+.table-responsive .table-dark {
+    border-collapse: collapse; /* Collapse table borders */
+    width: 100%; /* Make the table width 100% of its container */
+}
+
+.table-responsive .table-dark th,
+.table-responsive .table-dark td {
+    border: 0px solid #0a2479; /* Add a border to table cells */
+    padding: 10px; /* Add padding to cells */
+    text-align: center; /* Center-align text in cells */
+}
+
+.table-responsive .table-dark th {
+    background-color: #1f3264; /* Dark blue background for table headers */
+    color: #fff; /* White text color for table headers */
+}
+
+.table-responsive .table-dark tbody tr {
+    background-color: #e8f1ff; /* Light blue background for table rows */
+    color: #fff; /* White text color for table rows */
+}
+
+.table-responsive .table-dark tbody tr:hover {
+    background-color: #0172ce; /* Slightly darker light blue for hover */
+}
+
+.table-responsive .table-dark tbody tr:nth-child(odd) {
+    background-color: #111C44; /* Light blue for odd rows */
+}
+
+.table-responsive .table-dark tbody tr:nth-child(even) {
+    background-color: #5f6b9e2a; /* A slightly different shade for even rows */
+}
+
+/* Add a hover effect for table cells */
+.table-responsive .table-dark tbody tr:hover td {
+    background-color: #1159ac; /* Yellow background for cell hover */
+    color: #ffffff; /* Black text color for cell hover */
+}
+/* Pagination Button Styling */
+#prevPage{
+    background-color: #212c8d; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button borders */
+    padding: 10px 20px; /* Add padding to buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius: 5px; /* Add rounded corners to buttons */
+    margin: 5px; /* Add margin between buttons */
+}
+#nextPage {
+    background-color: #125391; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button borders */
+    padding: 10px 20px; /* Add padding to buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius: 5px; /* Add rounded corners to buttons */
+    margin: 5px; /* Add margin between buttons */
+}
+
+#prevPage:hover{
+    background-color: #50588b; /* Darker background color on hover */
+}
+#nextPage:hover {
+    background-color: #1a4866; /* Darker background color on hover */
+}
+
+/* Container for Pagination Buttons */
+.pagination-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    align-items: center; /* Center vertically within the container */
+}
+
+
+.rowCheckbox {
+    cursor: pointer;
+}
+
+.status-indicator {
+    
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    width: 12px;
+    height: 12px;
+}
+
+ /* Define custom classes for status indicators */
+ .status-active {
+    background-color: green; /* Green for "Active" */
+}
+.status-inactive {
+    background-color: gray; /* Gray for "Inactive" */
+}
+.status-error {
+    background-color: red; /* Red for "Error" */
+}
+
+.feather-edit, .feather-trash-2 {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.filters {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.filters input[type="text"], .filters select {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+#searchButton {
+    background: linear-gradient(to right, #20379d, #0d0a68);
+    color: #fff;
+    border: 1px solid #cdd1d8;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-right: 10px;
+}
+
+#searchButton:hover {
+    transform: scale(1.05);
+    font-weight: bold;
+}
+#deviceNameFilter, #communicationStatusFilter, #serialNumberFilter
+{
+    background-color: #f3f4f6;
+    border: solid 0px;
+    border-radius: 5px;
+    padding: 10px ;
+    color: #181616;
+    min-width: 10px;
+    
+}
+
+i.bx.bxs-edit.edit-icon {
+color: green; /* Change the color to your desired color */
+}
+
+i.bx.bxs-trash.delete-icon {
+color: red; /* Change the color to your desired color */
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    
+}
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+.modal-content {
+    background-color: #1D2A4A;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 20%;
+}
+
+/* .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+} */
+
+.modal-body {
+    margin-top: 20px;
+}
+
+.modal-body label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-body input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.modal-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#cancelButton {
+    background-color: #949494;
+    color: #fff;
+    transition: background-color 0.3s;
+    
+}
+#okButton {
+    background-color: #0b1785;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.c {
+    background-color: #ccc;
+    color: #333;
+}
+
+/* Modal Display Styles */
+.modal.active {
+    display: block;
+}
+.modal-actions button:hover {
+    opacity: 0.8;
+  }
+
+
+#confirmDeleteButton {
+    background-color: #0b1785;
+    color: #fff;
+    transition: background-color 0.3s;
+    
+}
+#cancelDeleteButton {
+    background-color: #949494;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+img.device-image{
+    height: 36px;
+    width: 36px;
+    margin-right: 5px;
+  }
+
+  .device-info {
+    display: flex;
+    align-items: center;
+  }

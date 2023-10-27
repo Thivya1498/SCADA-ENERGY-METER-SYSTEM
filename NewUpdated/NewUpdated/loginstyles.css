@@ -1,0 +1,413 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(
+      259.48deg,
+      rgba(196, 230, 245, 1) 0%,
+      rgba(16, 97, 172, 0.62) 100%
+    );
+    margin-left: 50px;
+    margin-right: 20px;
+    margin: 0px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 600px;
+    height: 600px;
+    background-color: #0D3360;
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.7s;
+    box-shadow: 0px 72px 80px -48px rgba(34, 58, 40, 1);
+}
+
+.card-front,
+.card-back {
+    border-top-left-radius: 20px;
+    border-left: 10px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    color: #fff;
+    padding: 50px;
+    box-sizing: border-box;
+    transform-origin: center;
+}
+
+.card-forgot {
+    border-top-left-radius: 20px;
+    border-left: 10px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    /* align-items: left; */
+    justify-content: left;
+    color: #fff;
+    padding: 40px;
+    box-sizing: border-box;
+    transform-origin: center;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 20px;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.input-field input {
+    padding: 14px 40px 14px 40px; /* Adjusted padding to give space for icons */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 1rem;
+    background-color: #f3f3f3;
+    transition: background-color 0.3s;
+}
+
+.input-field input:focus {
+    outline: none;
+    background-color: #e6f7ff;
+}
+
+.input-field .icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 1.2rem;
+}
+.input-field .icon-email {
+    margin-right: 10px;
+    position: absolute;
+    margin-left: 10px;
+}
+
+/* Positioned the 'eye' icon on the right of password input */
+.input-field .toggle-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.input-field .toggle-icon:hover {
+    color: #333;
+}
+
+.toggle-icon:hover {
+    color: #333; /* Darkens the icon on hover for better interactivity */
+}
+i.icon.fas.fa-lock
+{
+    color: #666;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #dcdcdc;
+    background-color: #f5f5f5;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-wrapper .icon {
+    margin-right: 10px;
+}
+
+.input-wrapper input {
+    flex: 1; /* Allows the input to take the remaining space */
+    border: none; 
+    outline: none; 
+    background-color: transparent; /* Make the input field's background transparent */
+    padding: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+.input-wrapper input:focus + .icon {
+    color: #007BFF;
+}
+
+.input-wrapper:focus-within {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0,123,255, 0.5);
+}
+
+.toggle-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
+.icon {
+    margin-right: 10px;
+}
+
+button {
+    padding: 12px 15px;
+    border: none;
+    background-color: #029664;
+    color: #fff;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: medium;
+}
+
+.image-section {
+    background-color: #c4e6f5;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0px 72px 80px -48px rgba(34, 58, 40, 1);
+}
+
+
+/* Styles for the meter.png image */
+.meter-image {
+    height: 50px;
+    width: 50px;
+    margin-right: 5px;
+}
+
+/* Styles for the 4.png image */
+.section-image {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: cover;
+    margin: 5px 0;
+    animation: fadeInZoom 1.5s ease-out forwards;
+    opacity: 0;  /* Initially hidden */
+}
+
+
+h1 {
+    /* flex: 1; Allows the text to take up the remaining width */
+    text-align: left;
+    font-size: 1.5rem; /* Adjust font size as necessary */
+}
+h3{
+    font-weight: normal;
+}
+p{
+    font-size: 18px;
+}
+
+.header-section {
+    display: flex;
+    align-items: center;  /* Centers items vertically */
+    width: 100%;
+    margin-bottom: 5px; /* Adds space below the header */
+}
+
+.remember-forgot-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.card-forgot {
+    border-radius: 20px;
+    position: absolute;
+    /* top: 0; */
+    /* left: 0; */
+    width: 450px;
+    height: 450px;
+    background-color: #0D3360;
+    /* color: #fff;
+    backface-visibility: hidden;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transform-origin: center;
+    transform: rotateY(180deg);  */
+}
+
+.submit-btn {
+    background-color: #029664;
+}
+
+.submit-btn:hover {
+    background-color: #139d0e;  /* Slightly darker shade */
+    transform: scale(1.01);  /* A subtle grow effect */
+    font-weight: bold;
+}
+
+@keyframes fadeInZoom {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Existing login-btn styles */
+.login-btn {
+    padding: 14px 15px;
+    border: none;
+    width: 100%;
+    background-color: #029664;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s; /* added transition */
+}
+
+.login-btn:hover {
+    background-color: #039f6b;  /* Slightly darker shade */
+    transform: scale(1.01);  /* A subtle grow effect */
+    font-weight: bold;
+}
+
+/* Existing signup-btn styles */
+.signup-btn {
+    padding: 14px 15px;
+    transition: background-color 0.3s, transform 0.3s; /* added transition */
+    width: 100%;
+}
+
+.signup-btn:hover {
+    background-color: #039f6b;  /* Slightly darker shade */
+    transform: scale(1.01);  /* A subtle grow effect */
+    font-weight: bold;
+}
+.highlighted-action {
+    font-weight: bold;
+    color: #f39404;
+    cursor: pointer;
+}
+.modal {
+    position: fixed; /* Makes the modal fixed position */
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Hidden by default */
+    z-index: 1000; /* This ensures the modal is above other content */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-backdrop {
+    /* position: absolute; Fills the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6); /* Black with some transparency */
+    z-index: -1; /* This ensures the backdrop is below the modal content */
+}
+
+.card-forgot {
+    z-index: 1;
+    
+}
+.icon-email {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.buttons-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 0px;
+    align-items: stretch;
+    flex-direction: row;
+}
+
+.cancel-btn {
+    padding: 12px 15px;
+    border: none;
+    background-color: #d9534f; /* Bootstrap default danger color */
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: medium;
+    transition: background-color 0.3s, transform 0.3s; /* added transition */
+}
+
+.cancel-btn:hover {
+    background-color: #c9302c;  /* Slightly darker shade */
+    transform: scale(1.01);  /* A subtle grow effect */
+}
+
+.forgot-password {
+    font-size: 16px;
+    cursor: pointer;
+    color: #029664; /* Makes the text match the color of your buttons for consistency */
+    text-decoration: underline; /* Optional: underlines the text to make it more obvious that it's clickable */
+    transition: color 0.3s; /* Smoothens color transition on hover */
+}
+
+.forgot-password:hover {
+    color: #42a584; /* Slightly darker shade on hover */
+}
+.guideforgot
+{
+    font-size: 16px;
+}
+
+.forgottext
+{
+    font-size: 18px;
+    margin-top: 0px;
+}

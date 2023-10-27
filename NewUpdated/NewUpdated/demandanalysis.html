@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Meter Data</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/full-screen.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        /* Global styling for scrollbar */
+        body::-webkit-scrollbar {
+            width: 10px;  /* Width of the scrollbar */
+        }
+
+        body::-webkit-scrollbar-track {
+            background-color: #2E2E2E;  /* Color of the track of scrollbar */
+            border-radius: 10px; /* Rounded corners for track */
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #555;  /* Color of the scroll thumb */
+            border-radius: 10px; /* Rounded corners for thumb */
+            border: 2px solid transparent; /* Lets the thumb "float" with some space around it */
+            background-clip: content-box; /* Avoids the border to be colored */
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: #999;  /* Color of the thumb when you hover over it */
+        }
+
+        body::-webkit-scrollbar-corner {
+            background-color: transparent; /* Makes right bottom corner transparent */
+        }
+
+        /* Styling for body and general elements */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #0B1437;
+            color: aliceblue;
+        }
+
+        /* Styling for the table and its headers */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            color: aliceblue;
+            border-radius: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #0d1e50;
+            color: white;
+        }
+
+        
+        select, input, button {
+            margin: 10px;
+            padding: 5px;
+        }
+        rect.highcharts-background
+        {
+            background-color: #0d1e50;
+        }
+        label {
+        margin-right: 10px;
+        font-weight: bold;
+        color: #F1EFEF; /* Change to desired color */
+        }
+
+        select, input[type="date"], input[type="month"], button {
+            margin: 10px 0; /* Vertical spacing */
+            padding: 10px;
+            border-radius: 4px; /* Rounded corners */
+            border-width:0px ;
+            margin-left: 0px;
+            margin-right: 15px;
+        }
+
+        button {
+            background: linear-gradient(to right, #20379d, #0d0a68);
+            color: #fff;
+            margin-top: 10px;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: 2px solid #cdd1d8
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            font-weight: bold;
+        }
+        #daysOfWeek, #daySelection, #monthSelection {
+        display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Selection Criteria -->
+<div>
+    <div>
+        <h3 style="color: #f2f2f2;">Demand Analysis</h3>
+    
+        <!-- Plant Location -->
+        <label>Plant Location:</label>
+        <select id="plantLocation">
+            <option value="1">Reactive Energy Sdn Bhd</option>
+        </select>
+    
+        <!-- Energy Meter ID -->
+        <label>Energy Meter ID:</label>
+        <select id="meterID">
+            <option value="1">Energy Meter 1</option>
+        </select>
+    
+        <input type="radio" id="dailyView" name="viewType" value="daily" checked>
+        <label for="dailyView">View by Day</label>
+        
+        <input type="radio" id="monthlyView" name="viewType" value="monthly" >
+        <label for="monthlyView">View by Monthly</label>
+        <br>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+        <!-- The date inputs are commented out in your code but if needed, you can add them back in. They'll be controlled by the toggleDateSelection function. -->
+        <label>Select Day:</label>
+        <input type="date" id="daySelection">
+
+        <label>Select Month:</label>
+        <input type="month" id="monthSelection">
+
+    <!-- Days of the week checkboxes -->
+    <div id="daysOfWeek">
+        <label><input type="checkbox" value="Monday">Monday</label>
+        <label><input type="checkbox" value="Tuesday">Tuesday</label>
+        <label><input type="checkbox" value="Wednesday">Wednesday</label>
+        <label><input type="checkbox" value="Thursday">Thursday</label>
+        <label><input type="checkbox" value="Friday">Friday</label>
+        <label><input type="checkbox" value="Saturday">Saturday</label>
+        <label><input type="checkbox" value="Sunday">Sunday</label>
+    </div>
+</div>
+
+    <!-- Interval -->
+    <select id="intervalSelection">
+        <option value="15">15 minutes</option>
+        <option value="30">Half Hour</option>
+        <option value="60">One Hour</option>
+    </select>
+
+    <!-- View Data Button -->
+    <button onclick="generateData()">View Data</button>
+</div>
+
+<!-- Graph Container -->
+<div id="chartContainer" style="height: 400px;"></div>
+
+<!-- Data Table -->
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Times</th>
+            <th>Max Power[kWh]</th>
+        </tr>
+    </thead>
+    <tbody id="dataTable"></tbody>
+</table>
+
+<script>
+    function toggleDateSelection() {
+    var viewType = document.querySelector('input[name="viewType"]:checked').value;
+
+    var daysOfWeekDiv = document.getElementById("daysOfWeek");
+    var dayInput = document.getElementById("daySelection");
+    var monthInput = document.getElementById("monthSelection");
+    
+    // Identify the labels
+    var dayInputLabel = dayInput.previousElementSibling;
+    var monthInputLabel = monthInput.previousElementSibling;
+
+    if (viewType === "monthly") {
+        daysOfWeekDiv.style.display = "block";
+        dayInput.style.display = "none";
+        dayInputLabel.style.display = "none"; // Hide the "Select Day" label
+        monthInput.style.display = "block"; 
+        monthInputLabel.style.display = "block"; // Show the "Select Month" label
+    } else if (viewType === "daily") {
+        daysOfWeekDiv.style.display = "none";
+        dayInput.style.display = "block";
+        dayInputLabel.style.display = "block"; // Show the "Select Day" label
+        monthInput.style.display = "none";
+        monthInputLabel.style.display = "none"; // Hide the "Select Month" label
+    }
+}
+
+    document.querySelectorAll('input[name="viewType"]').forEach(function (radio) {
+        radio.addEventListener("change", toggleDateSelection);
+    });
+    toggleDateSelection();
+    
+    document.getElementById('monthSelection').addEventListener('change', function() {
+    document.getElementById('daySelection').value = ""; // clear day selection
+});
+
+document.getElementById('daySelection').addEventListener('change', function() {
+    document.getElementById('monthSelection').value = ""; // clear month selection
+});
+
+function generateData() {
+    // Extract user selections
+    let meterID = document.getElementById('meterID').value;
+    let month = document.getElementById('monthSelection').value;
+    let selectedDay = document.getElementById('daySelection').value;
+    let days = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+    let interval = document.getElementById('intervalSelection').value;
+
+    // Generate dummy data
+    let data = [];
+    let startDate = new Date(month);
+    let endDate = new Date(new Date(month).setMonth(startDate.getMonth() + 1));
+    
+    // Handle specific day selection
+    let today = new Date();
+    if (selectedDay) {
+        startDate = new Date(selectedDay);
+        startDate.setHours(0, 0, 0, 0);
+        if (startDate.toDateString() == today.toDateString()) {
+            endDate = today; 
+        } else {
+            endDate = new Date(new Date(selectedDay).getTime() + 24 * 60 * 60 * 1000); // Plus one day
+        }
+        days = [startDate.toLocaleDateString('en-US', { weekday: 'long' })]; 
+    }
+
+    while (startDate < endDate) {
+        if (days.includes(startDate.toLocaleDateString('en-US', { weekday: 'long' }))) {
+            data.push({
+                date: startDate.toLocaleDateString(),
+                time: `${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}`,
+                maxPower: Math.floor(Math.random() * 100) // Random kWh value
+            });
+            startDate.setMinutes(startDate.getMinutes() + parseInt(interval));
+        } else {
+            startDate.setDate(startDate.getDate() + 1);
+            startDate.setHours(0, 0, 0, 0);
+        }
+    }
+
+
+        // Plot on Highcharts
+        Highcharts.chart('chartContainer', {
+            chart: {
+                type: 'column',
+                backgroundColor: "#02275e",
+                borderRadius: 10,
+                events: {
+                    load: function() {
+                        var chart = this,
+                            options = chart.options.exporting.buttons.contextButton.menuItems;
+                        if (chart.fullscreen) {
+                            options.unshift({
+                                text: 'Toggle Fullscreen',
+                                onclick: function() {
+                                    chart.fullscreen.toggle();
+                                }
+                            });
+                        }
+                    }
+                }
+            },
+            title: {
+                text: 'Demand [kWh]',
+                style: {
+                        color: '#fff'
+                    },
+            },
+            xAxis: {
+    title: {
+        text: 'Interval',
+        style: {
+            color: '#fff'
+        }
+    },
+    categories: data.map(d => `${d.date} ${d.time}`),
+    labels: {
+        style: {
+            color: '#F1EFEF'  // <-- This line sets the color of the x-axis data interval labels
+        }
+    }
+},
+
+yAxis: {
+    title: {
+        text: 'Energy Consumption [kWh]',
+        style: {
+            color: '#fff'  // <-- Color for the y-axis title
+        }
+    },
+    labels: {
+        style: {
+            color: '#F1EFEF'  // <-- This line sets the color of the y-axis data labels
+        }
+    },
+    tickColor: '#F1EFEF'  // <-- Color of the y-axis ticks
+},
+legend: {  // <-- Insert the legend configuration here
+        itemStyle: {
+            color: '#73C2FB'  // Color of the legend items
+        },
+        itemHoverStyle: {
+            color: '#FFC300'  // Color of the legend items when they are hovered
+        }
+    },
+    
+    
+            series: [{
+                name: 'Energy Consumption [kWh]',
+                data: data.map(d => d.maxPower),
+                borderWidth: 0
+                //color: '#FF5733',
+                
+            }],
+            exporting: {
+                buttons: {
+                    contextButton: {
+                        menuItems: ['viewFullscreen', 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG']
+                    }
+                }
+            }
+        });
+
+        // Populate the table
+        let tableBody = document.getElementById('dataTable');
+        tableBody.innerHTML = data.map(d => {
+            let displayDate = new Date(d.date);
+            return `
+                <tr>
+                    <td>${d.date} (${displayDate.toLocaleDateString('en-US', { weekday: 'long' })})</td>
+                    <td>${d.time}</td>
+                    <td>${d.maxPower} kWh</td>
+                </tr>
+            `;
+        }).join('');
+
+
+    }
+        let today = new Date();
+
+        // Set the month input to the current month by default
+        let currentMonth = today.toISOString().slice(0,7);
+        document.getElementById('monthSelection').value = currentMonth;
+
+        // Set the day input to the current day by default
+        let todayDate = today.toISOString().slice(0,10);
+        document.getElementById('daySelection').value = todayDate;
+
+        // Call generateData to auto-display the data when the page loads
+        generateData();
+</script>
+</body>
+
+</html>

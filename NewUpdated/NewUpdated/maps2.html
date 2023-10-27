@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Homepage with Maps</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="maps.css" />
+    <link rel="stylesheet" href="testside.css">
+</head>
+
+<body>
+    <header>
+        <div class="top-header">
+            <!-- Top header content goes here -->
+        </div>
+    </header>
+    
+    <nav class="side-menu">
+        <ul>
+            <li><a href="maps.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Analytic Data</a></li>
+            <li>
+                <a href="#"><i class="fas fa-cogs"></i> Management</a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-seedling"></i> Plant Management</a></li>
+                    <li><a href="#"><i class="fas fa-laptop"></i> Device Management</a></li>
+                    <li><a href="#"><i class="fas fa-building"></i> Company Management</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-bell"></i> Alarm</a>
+                <ul class="submenu">
+                    <li><a href="alarmactive.html"><i class="fas fa-bell"></i> Alarm Active</a></li>
+                    <li><a href="#"><i class="fas fa-history"></i> Alarm Historical</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-cog"></i> System Setting</a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-user-cog"></i> Personal Setting</a></li>
+                    <li><a href="#"><i class="fas fa-trash"></i> Delete Account</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-info-circle"></i> About Us</a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Term of Use</a></li>
+                    <li><a href="#"><i class="fas fa-code"></i> Version Information</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <main id="main-content">
+    <!-- <h1>Energy Meter Monitoring System Homepage</h1> -->
+
+    <!-- Information Boxes -->
+    <div class="info-container">
+
+      <div class="info-box">
+          <div class="icon-wrapper">
+              <img src="images/location (1).png" alt="Plant Icon">
+          </div>
+          <span>Total Monitored Plants</span>
+          <p>14</p>
+      </div>
+  
+      <div class="info-box">
+          <div class="icon-wrapper">
+              <img src="images/power-meter.png" alt="Devices Icon">
+          </div>
+          <span>Total Devices</span>
+          <p>28</p>
+      </div>
+  
+      <div class="info-box">
+          <div class="icon-wrapper">
+              <img src="images/electric-meter (1).png" alt="Active Devices Icon">
+          </div>
+          <span>Active Devices</span>
+          <p>28</p>
+      </div>
+  
+      <div class="info-box">
+          <div class="icon-wrapper">
+              <img src="images/growth.png" alt="Energy Icon">
+          </div>
+          <span>Total Energy Consumption</span>
+          <p>8120 kWh</p>
+      </div>
+  </div>
+
+    <!-- Swiper container -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- First Slide (Map) -->
+            <div class="swiper-slide">
+                  <!-- Search form -->
+        <!-- <input type="text" id="locationSearch" placeholder="Enter location name..."> -->
+        <!-- <button id="searchButton">Search</button> -->
+        <!-- <button id="darkModeToggle">Toggle Dark Mode</button> -->
+        <div id="map">
+          <div class="map-search">
+            <input type="text" id="locationSearch" placeholder="Enter location name...">
+            <button id="searchButton">Search</button>
+            <span>Dark Mode: </span> <!-- Corrected the span here -->
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+      </div>
+    </div>
+
+            
+    <!-- Plant Management Page -->
+<div class="swiper-slide">
+  <!-- Search and Add New Plant Container -->
+  <div class="plant-management-container">
+    <input type="text" placeholder="Search by Plant Name" id="plantSearch">
+    <button id="searchPlant">Search</button>
+    <button id="deleteSelected">Delete Selected</button>
+    <button id="addNewPlant">Add New Plant</button>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="selectAll"></th>
+            <th>Status</th>
+            <th>Plant Name</th>
+            <th>Location</th>
+            <th>Energy Usage Today (kWh)</th>
+            <th>Cumulative Energy Usage (kWh)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td><span class="status-indicator active"></span>Active</td>
+            <td>Company A</td>
+            <td>Petaling Jaya, Selangor</td>
+            <td>150</td>
+            <td>5000</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td><span class="status-indicator inactive"></span>Inactive</td>
+            <td>Company B</td>
+            <td>Kuala Lumpur</td>
+            <td>120</td>
+            <td>4500</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td><span class="status-indicator error"></span>Error</td>
+            <td>Company C</td>
+            <td>Penang</td>
+            <td>90</td>
+            <td>4200</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td><span class="status-indicator active"></span>Active</td>
+          <td>Company A</td>
+          <td>Petaling Jaya, Selangor</td>
+          <td>150</td>
+          <td>5000</td>
+      </tr>
+      <tr>
+          <td><input type="checkbox"></td>
+          <td><span class="status-indicator inactive"></span>Inactive</td>
+          <td>Company B</td>
+          <td>Kuala Lumpur</td>
+          <td>120</td>
+          <td>4500</td>
+      </tr>
+      <tr>
+          <td><input type="checkbox"></td>
+          <td><span class="status-indicator error"></span>Error</td>
+          <td>Company C</td>
+          <td>Penang</td>
+          <td>90</td>
+          <td>4200</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox"></td>
+        <td><span class="status-indicator active"></span>Active</td>
+        <td>Company A</td>
+        <td>Petaling Jaya, Selangor</td>
+        <td>150</td>
+        <td>5000</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td><span class="status-indicator inactive"></span>Inactive</td>
+        <td>Company B</td>
+        <td>Kuala Lumpur</td>
+        <td>120</td>
+        <td>4500</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td><span class="status-indicator error"></span>Error</td>
+        <td>Company C</td>
+        <td>Penang</td>
+        <td>90</td>
+        <td>4200</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"></td>
+      <td><span class="status-indicator active"></span>Active</td>
+      <td>Company A</td>
+      <td>Petaling Jaya, Selangor</td>
+      <td>150</td>
+      <td>5000</td>
+  </tr>
+  <tr>
+      <td><input type="checkbox"></td>
+      <td><span class="status-indicator inactive"></span>Inactive</td>
+      <td>Company B</td>
+      <td>Kuala Lumpur</td>
+      <td>120</td>
+      <td>4500</td>
+  </tr>
+  <tr>
+      <td><input type="checkbox"></td>
+      <td><span class="status-indicator error"></span>Error</td>
+      <td>Company C</td>
+      <td>Penang</td>
+      <td>90</td>
+      <td>4200</td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td><span class="status-indicator inactive"></span>Inactive</td>
+    <td>Company B</td>
+    <td>Kuala Lumpur</td>
+    <td>120</td>
+    <td>4500</td>
+</tr>
+<tr>
+    <td><input type="checkbox"></td>
+    <td><span class="status-indicator error"></span>Error</td>
+    <td>Company C</td>
+    <td>Penang</td>
+    <td>90</td>
+    <td>4200</td>
+</tr>
+        <!-- Add more rows as required for dummy data -->
+    </tbody>
+</table>
+
+<!-- Popup modal for adding a new plant -->
+<div id="newPlantModal">
+    <label for="companyName">Company:</label>
+    <input type="text" id="companyName" placeholder="Enter company name">
+
+    <label for="plantName">Plant Name:</label>
+    <input type="text" id="plantName" placeholder="Enter plant name">
+
+    <label for="contactPerson">Contact Person:</label>
+    <input type="text" id="contactPerson" placeholder="Enter contact person's name">
+
+    <label for="gridConnectionDate">Grid connection date:</label>
+    <input type="date" id="gridConnectionDate">
+
+    <button id="savePlant">Save</button>
+    <button id="cancelAdd">Cancel</button>
+</div>
+<div class="overlay"></div>
+      <div class="pagination">
+        <div id="pagination">
+          <button onclick="prevPage()" id="prev">Previous</button>
+          <button onclick="nextPage()" id="next">Next</button>
+      </div>
+  </div>
+</div>
+</div>
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- Swiper Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</main>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="maps.js"></script>
+
+</body>
+</html>
